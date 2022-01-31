@@ -19,12 +19,10 @@ import java.util.function.Function;
 @Validated
 public class InicioSesionUseCase implements Function<String, Mono<UsuarioDTO>> {
 
-    private final UsuarioRepository repositorio;
     private final MapperUtils mapper;
     private final Validaciones validaciones;
 
-    public InicioSesionUseCase(UsuarioRepository repositorio, MapperUtils mapper, Validaciones validaciones) {
-        this.repositorio = repositorio;
+    public InicioSesionUseCase(MapperUtils mapper, Validaciones validaciones) {
         this.mapper = mapper;
         this.validaciones = validaciones;
     }

@@ -8,13 +8,16 @@ import co.com.sofka.parches.utils.Validaciones;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import static org.mockito.ArgumentMatchers.refEq;
 
 
 class InicioSesionUseCaseTest {
 
-    UsuarioRepository repository;
     Validaciones validaciones;
     InicioSesionUseCase useCase;
 
@@ -23,8 +26,7 @@ class InicioSesionUseCaseTest {
     public void setUp() {
         MapperUtils mapper = new MapperUtils();
         validaciones = Mockito.mock(Validaciones.class);
-        repository = Mockito.mock(UsuarioRepository.class);
-        useCase = new InicioSesionUseCase(repository, mapper, validaciones);
+        useCase = new InicioSesionUseCase( mapper, validaciones);
     }
 
 
@@ -43,7 +45,6 @@ class InicioSesionUseCaseTest {
 
         Usuario usuario = mapper.mapperDTOaEntidadUsuario("idMongo").apply(respuesta);
 
-        Mockito.when(repository.findByUid(Mockito.any())).thenReturn(Mono.just(usuario));
         Mockito.when(validaciones
                         .verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(Mockito.any()))
                         .thenReturn(Mono.just(usuario));
@@ -59,7 +60,25 @@ class InicioSesionUseCaseTest {
                 })
                 .verifyComplete();
 
+            Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(uid);
 
     }
+
+
+    @Test
+    void iniciarSesionError() {
+        String uid = "IdentificacionUsuario";
+
+        Mockito.when(validaciones
+                        .verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(Mockito.any()))
+                .thenReturn(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)));
+
+        StepVerifier.create(useCase.apply(uid))
+                .expectError(ResponseStatusException.class);
+
+        Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(uid);
+
+    }
+
 
 }
