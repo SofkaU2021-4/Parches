@@ -36,6 +36,13 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.gradle/sonarqube-gradle-plugin -->
+        <dependency>
+            <groupId>org.sonarsource.scanner.gradle</groupId>
+            <artifactId>sonarqube-gradle-plugin</artifactId>
+            <version>3.3</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
