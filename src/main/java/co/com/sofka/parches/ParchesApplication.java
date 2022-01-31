@@ -12,7 +12,7 @@ public class ParchesApplication {
     public static void main(String[] args) {
         SpringApplication.run(ParchesApplication.class, args);
         try {
-            Firebase.conectar();
+            Firebase.inicializarFirebase();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -26,7 +26,7 @@ public class MapperUtils {
             usuario.setUid(crearUsuario.getUid());
             usuario.setNombres(crearUsuario.getNombres());
             usuario.setEmail(crearUsuario.getEmail());
-            usuario.setImagenUrl(crearUsuario.getEmail());
+            usuario.setImagenUrl(crearUsuario.getImagenUrl());
             return usuario;
         };
     }

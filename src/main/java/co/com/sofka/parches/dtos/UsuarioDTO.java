@@ -54,6 +54,11 @@ public class UsuarioDTO {
         this.email = email;
     }
 
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
 
-
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
 }

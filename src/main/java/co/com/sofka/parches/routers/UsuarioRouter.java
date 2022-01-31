@@ -22,7 +22,7 @@ public class UsuarioRouter {
     public RouterFunction<ServerResponse> createUser(CrearUsuarioUseCase useCase) {
         Function<UsuarioDTO, Mono<ServerResponse>> executor = UsuarioDTO -> useCase.apply(UsuarioDTO)
                 .flatMap(result -> ServerResponse.ok()
-                        .contentType(MediaType.TEXT_PLAIN)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(result));
         return route(
                 POST("/crearUsuario").and(accept(MediaType.APPLICATION_JSON)),

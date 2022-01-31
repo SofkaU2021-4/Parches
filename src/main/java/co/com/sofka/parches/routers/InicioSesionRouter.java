@@ -1,7 +1,7 @@
 package co.com.sofka.parches.routers;
 
-import co.com.sofka.parches.personal.PruebaModel;
-import co.com.sofka.parches.useCases.InicoSesionCasoDeUso;
+import co.com.sofka.parches.collections.Usuario;
+import co.com.sofka.parches.useCases.InicioSesionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -13,17 +13,17 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class InicioSesion {
+public class InicioSesionRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> iniciarSesion(InicoSesionCasoDeUso casoDeUso) {
+    public RouterFunction<ServerResponse> iniciarSesion(InicioSesionUseCase casoDeUso) {
         return route(GET("/inicioSesion/{uid}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(
-                                casoDeUso.apply(request.pathVariable("uid")), PruebaModel.class
+                                casoDeUso.apply(request.pathVariable("uid")), Usuario.class
                         ))
-                        .onErrorResume(error->ServerResponse.badRequest().build())
+
         );
     }
 

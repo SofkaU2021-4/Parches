@@ -11,7 +11,7 @@ public class Firebase {
 
 
     //TODO: Poner la ruta del archivo de firebase del proyecto a despliegue
-    public static void conectar() throws IOException {
+    public static void inicializarFirebase() throws IOException {
         FileInputStream serviceAccount =
                 new FileInputStream("service-account.json");
 

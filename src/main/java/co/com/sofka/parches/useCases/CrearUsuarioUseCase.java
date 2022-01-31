@@ -1,8 +1,10 @@
 package co.com.sofka.parches.useCases;
 
+import co.com.sofka.parches.collections.Usuario;
 import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.mappers.MapperUtils;
 import co.com.sofka.parches.repositories.UsuarioRepository;
+import co.com.sofka.parches.utils.Validaciones;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -11,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Validated
-public class CrearUsuarioUseCase implements CrearUsuario{
+public class CrearUsuarioUseCase implements CrearUsuario {
     private final UsuarioRepository usuarioRepository;
     private final MapperUtils mapperUtils;
 
@@ -21,11 +23,14 @@ public class CrearUsuarioUseCase implements CrearUsuario{
     }
 
     @Override
-    public Mono<String> apply(UsuarioDTO usuarioDTO) {
-        return usuarioRepository.findByUid(usuarioDTO.getUid()).flatMap(
-                usuario -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)))
+    public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
+        return new Validaciones(usuarioRepository).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid())
+                .flatMap(usuario -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)))
                 .switchIfEmpty(usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null)
-                        .apply(usuarioDTO)))
-                .thenReturn("save");
+                        .apply(usuarioDTO))
+                )
+                .map(usuario -> mapperUtils.mapperEntidadUsuarioaDTO().apply((Usuario) usuario))
+                .onErrorResume(error -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)));
     }
+
 }
