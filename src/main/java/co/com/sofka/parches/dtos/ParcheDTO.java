@@ -26,27 +26,27 @@ public class ParcheDTO {
     @NonNull
     private CapacidadParche capacidadMaxima;
     @NonNull
-    private UbicacionParche ubicacion;
+    private UbicacionParche ubicacionParche;
 
     public ParcheDTO(){
 
     }
 
-    public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull NombreParche nombreParche,
-                     DescripcionParche descripcion, FechaParche fechaCreacion, @NonNull FechaParche fechaInicio,
-                     @NonNull FechaParche fechaFin, Estado estado, @NonNull Categoria categoria, @NonNull CapacidadParche capacidadMaxima,
-                     @NonNull UbicacionParche ubicacion) {
+    public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull String nombreParche,
+                     String descripcion, String fechaCreacion, @NonNull String fechaInicio,
+                     @NonNull String fechaFin, Estado estado, @NonNull Categoria categoria, @NonNull Long capacidadMaxima,
+                     @NonNull UbicacionParche ubicacionParche) {
         this.id = id;
         this.duenoDelParche = duenoDelParche;
-        this.nombreParche = nombreParche;
-        this.descripcion = descripcion;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.nombreParche = new NombreParche(nombreParche);
+        this.descripcion = new DescripcionParche(descripcion);
+        this.fechaCreacion = new FechaParche(fechaCreacion);
+        this.fechaInicio = new FechaParche(fechaInicio);
+        this.fechaFin = new FechaParche(fechaFin);
         this.estado = estado;
         this.categoria = categoria;
-        this.capacidadMaxima = capacidadMaxima;
-        this.ubicacion = ubicacion;
+        this.capacidadMaxima = new CapacidadParche(capacidadMaxima);
+        this.ubicacionParche = ubicacionParche;
     }
 
     public String getId() {
@@ -57,21 +57,19 @@ public class ParcheDTO {
         this.id = id;
     }
 
-    @NonNull
     public String getDuenoDelParche() {
         return duenoDelParche;
     }
 
-    public void setDuenoDelParche(@NonNull String duenoDelParche) {
+    public void setDuenoDelParche(String duenoDelParche) {
         this.duenoDelParche = duenoDelParche;
     }
 
-    @NonNull
     public NombreParche getNombreParche() {
         return nombreParche;
     }
 
-    public void setNombreParche(@NonNull NombreParche nombreParche) {
+    public void setNombreParche(NombreParche nombreParche) {
         this.nombreParche = nombreParche;
     }
 
@@ -91,21 +89,19 @@ public class ParcheDTO {
         this.fechaCreacion = fechaCreacion;
     }
 
-    @NonNull
     public FechaParche getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(@NonNull FechaParche fechaInicio) {
+    public void setFechaInicio(FechaParche fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    @NonNull
     public FechaParche getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(@NonNull FechaParche fechaFin) {
+    public void setFechaFin(FechaParche fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -117,30 +113,44 @@ public class ParcheDTO {
         this.estado = estado;
     }
 
-    @NonNull
     public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(@NonNull Categoria categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    @NonNull
     public CapacidadParche getCapacidadMaxima() {
         return capacidadMaxima;
     }
 
-    public void setCapacidadMaxima(@NonNull CapacidadParche capacidadMaxima) {
+    public void setCapacidadMaxima(CapacidadParche capacidadMaxima) {
         this.capacidadMaxima = capacidadMaxima;
     }
 
-    @NonNull
-    public UbicacionParche getUbicacion() {
-        return ubicacion;
+    public UbicacionParche getUbicacionParche() {
+        return ubicacionParche;
     }
 
-    public void setUbicacion(@NonNull UbicacionParche ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setUbicacionParche(UbicacionParche ubicacionParche) {
+        this.ubicacionParche = ubicacionParche;
+    }
+
+    @Override
+    public String toString() {
+        return "ParcheDTO{" +
+                "id='" + id + '\'' +
+                ", duenoDelParche='" + duenoDelParche + '\'' +
+                ", nombreParche=" + nombreParche +
+                ", descripcion=" + descripcion +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", estado=" + estado +
+                ", categoria=" + categoria +
+                ", capacidadMaxima=" + capacidadMaxima +
+                ", ubicacion=" + ubicacionParche +
+                '}';
     }
 }

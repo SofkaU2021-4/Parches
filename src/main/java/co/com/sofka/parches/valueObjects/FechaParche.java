@@ -1,15 +1,17 @@
 package co.com.sofka.parches.valueObjects;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class FechaParche {
+public class FechaParche implements Serializable {
 
     private LocalDateTime valorFecha;
 
-    public FechaParche(){}
+    public FechaParche(){
+    }
 
-    public FechaParche(LocalDateTime fecha){
-        this.valorFecha = fecha;
+    public FechaParche(String fecha){
+        this.valorFecha = LocalDateTime.parse(fecha);
     }
 
     public Boolean esFechaAnterior(FechaParche fecha){
