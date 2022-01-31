@@ -1,9 +1,11 @@
 package co.com.sofka.parches.collections;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Document
@@ -13,7 +15,7 @@ public class Usuario {
     private String uid;
     @Size(min = 0, max = 50, message = "Maximo 50 caracteres")
     private String nombres;
-    @Email
+    @Indexed(unique = true)
     private String email;
 
     public Usuario() {
