@@ -14,7 +14,8 @@ public class MapperUtils {
                 entidad.getId(),
                 entidad.getUid(),
                 entidad.getNombres(),
-                entidad.getEmail()
+                entidad.getEmail(),
+                entidad.getImagenUrl()
         );
     }
 
@@ -25,6 +26,7 @@ public class MapperUtils {
             usuario.setUid(actualizarUsuario.getUid());
             usuario.setNombres(actualizarUsuario.getNombres());
             usuario.setEmail(actualizarUsuario.getEmail());
+            usuario.setImagenUrl(actualizarUsuario.getEmail());
             return usuario;
         };
     }

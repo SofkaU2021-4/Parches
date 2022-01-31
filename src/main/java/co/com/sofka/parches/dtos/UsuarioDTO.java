@@ -9,15 +9,17 @@ public class UsuarioDTO {
     private String uid;
     private String nombres;
     private String email;
+    private String imagenUrl;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String id, String uid, String nombres, String email) {
+    public UsuarioDTO(String id, String uid, String nombres, String email, String imagenUrl) {
         this.id = id;
         this.uid = uid;
         this.nombres = nombres;
         this.email = email;
+        this.imagenUrl=imagenUrl;
     }
 
     public String getId() {
@@ -52,17 +54,6 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UsuarioDTO)) return false;
-        UsuarioDTO that = (UsuarioDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(uid, that.uid) && Objects.equals(nombres, that.nombres) && Objects.equals(email, that.email);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, uid, nombres, email);
-    }
 
 }

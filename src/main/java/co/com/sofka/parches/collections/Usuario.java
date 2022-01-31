@@ -17,15 +17,17 @@ public class Usuario {
     private String nombres;
     @Indexed(unique = true)
     private String email;
+    private String imagenUrl;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String uid, String nombres, String email) {
+    public Usuario(String id, String uid, String nombres, String email, String imagenUrl) {
         this.id = id;
         this.uid = uid;
         this.nombres = nombres;
         this.email = email;
+        this.imagenUrl=imagenUrl;
     }
 
     public String getId() {
@@ -58,5 +60,13 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 }
