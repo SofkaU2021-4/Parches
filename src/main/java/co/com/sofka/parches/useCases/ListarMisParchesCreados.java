@@ -5,5 +5,5 @@ import reactor.core.publisher.Flux;
 
 @FunctionalInterface
 public interface ListarMisParchesCreados {
-    Flux<ParcheDTO> listarMisParchesCreados(ParcheDTO parcheDTO);
+    Flux<ParcheDTO> listarMisParchesCreados(String duenoDelParche);
 }
