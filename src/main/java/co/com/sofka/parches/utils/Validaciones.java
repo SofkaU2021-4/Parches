@@ -6,9 +6,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
+@Component
 public class Validaciones {
 
     private final UsuarioRepository repositorio;

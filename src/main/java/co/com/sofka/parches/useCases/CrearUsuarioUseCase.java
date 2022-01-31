@@ -16,20 +16,24 @@ import reactor.core.publisher.Mono;
 public class CrearUsuarioUseCase implements CrearUsuario {
     private final UsuarioRepository usuarioRepository;
     private final MapperUtils mapperUtils;
+    private final Validaciones validaciones;
 
-    public CrearUsuarioUseCase(UsuarioRepository usuarioRepository, MapperUtils mapperUtils) {
+    public CrearUsuarioUseCase(UsuarioRepository usuarioRepository, MapperUtils mapperUtils, Validaciones validaciones) {
         this.usuarioRepository = usuarioRepository;
         this.mapperUtils = mapperUtils;
+        this.validaciones = validaciones;
     }
 
     @Override
     public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
-        return new Validaciones(usuarioRepository).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid())
+        return validaciones
+                .verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid())
                 .flatMap(usuario -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)))
                 .switchIfEmpty(usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null)
                         .apply(usuarioDTO))
                 )
-                .map(usuario -> mapperUtils.mapperEntidadUsuarioaDTO().apply((Usuario) usuario))
+                .map(usuario -> mapperUtils
+                        .mapperEntidadUsuarioaDTO().apply((Usuario) usuario))
                 .onErrorResume(error -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)));
     }
 

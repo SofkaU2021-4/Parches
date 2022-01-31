@@ -1,6 +1,7 @@
 package co.com.sofka.parches.routers;
 
 import co.com.sofka.parches.collections.Usuario;
+import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.useCases.InicioSesionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ public class InicioSesionRouter {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(
-                                casoDeUso.apply(request.pathVariable("uid")), Usuario.class
+                                casoDeUso.apply(request.pathVariable("uid")), UsuarioDTO.class
                         ))
 
         );
