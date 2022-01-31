@@ -13,6 +13,8 @@ target/
 .springBeans
 .sts4-cache
 
+
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -33,5 +35,4 @@ build/
 .vscode/
 
 
-service-account.json
 service-account.json
