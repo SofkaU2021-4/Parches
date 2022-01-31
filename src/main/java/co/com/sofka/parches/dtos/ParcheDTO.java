@@ -3,29 +3,20 @@ package co.com.sofka.parches.dtos;
 import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
-import com.mongodb.lang.NonNull;
+import lombok.NonNull;
 
 public class ParcheDTO {
 
     private String id;
-    @NonNull
     private String duenoDelParche;
-    @NonNull
     private NombreParche nombreParche;
-
     private DescripcionParche descripcion;
     private FechaParche fechaCreacion;
-    @NonNull
     private FechaParche fechaInicio;
-    @NonNull
     private FechaParche fechaFin;
-
     private Estado estado;
-    @NonNull
     private Categoria categoria;
-    @NonNull
     private CapacidadParche capacidadMaxima;
-    @NonNull
     private UbicacionParche ubicacionParche;
 
     public ParcheDTO(){
