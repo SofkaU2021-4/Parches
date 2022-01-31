@@ -2,22 +2,22 @@ package co.com.sofka.parches.valueObjects;
 
 public class UbicacionParche {
 
-    private Double latitud;
-    private Double longitud;
+    private Double x;
+    private Double y;
 
     public UbicacionParche(){}
 
-    public UbicacionParche(Double latitud, Double longitud){
-        this.latitud = latitud;
-        this.longitud = longitud;
+    public UbicacionParche(Double x, Double y){
+        this.x = x;
+        this.y = y;
     }
 
-    public Double getLatitud() {
-        return latitud;
+    public Double getX() {
+        return x;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    public Double getY() {
+        return y;
     }
 
 }
