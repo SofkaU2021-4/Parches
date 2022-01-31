@@ -28,6 +28,8 @@ public class ParcheDTO {
     @NonNull
     private UbicacionParche ubicacionParche;
 
+    private CapacidadParche cantidadParticipantes;
+
     public ParcheDTO(){
 
     }
@@ -137,6 +139,14 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
+    public CapacidadParche getCantidadParticipantes() {
+        return cantidadParticipantes;
+    }
+
+    public void setCantidadParticipantes(CapacidadParche cantidadParticipantes) {
+        this.cantidadParticipantes = cantidadParticipantes;
+    }
+
     @Override
     public String toString() {
         return "ParcheDTO{" +
@@ -150,7 +160,8 @@ public class ParcheDTO {
                 ", estado=" + estado +
                 ", categoria=" + categoria +
                 ", capacidadMaxima=" + capacidadMaxima +
-                ", ubicacion=" + ubicacionParche +
+                ", ubicacionParche=" + ubicacionParche +
+                ", cantidadParticipantes=" + cantidadParticipantes +
                 '}';
     }
 }
