@@ -23,8 +23,9 @@ public class CrearUsuarioUseCase implements CrearUsuario{
     @Override
     public Mono<String> apply(UsuarioDTO usuarioDTO) {
         return usuarioRepository.findByUid(usuarioDTO.getUid()).flatMap(
-                usuario -> {
-            return Mono.error(new ResponseStatusException(HttpStatus.CONFLICT));
-        }).switchIfEmpty(usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null).apply(usuarioDTO))).thenReturn("save");
+                usuario -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)))
+                .switchIfEmpty(usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null)
+                        .apply(usuarioDTO)))
+                .thenReturn("save");
     }
 }

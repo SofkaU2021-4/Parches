@@ -20,13 +20,13 @@ public class MapperUtils {
     }
 
     public Function<UsuarioDTO, Usuario> mapperDTOaEntidadUsuario(String id){
-        return actualizarUsuario -> {
+        return crearUsuario -> {
             var usuario = new Usuario();
             usuario.setId(id);
-            usuario.setUid(actualizarUsuario.getUid());
-            usuario.setNombres(actualizarUsuario.getNombres());
-            usuario.setEmail(actualizarUsuario.getEmail());
-            usuario.setImagenUrl(actualizarUsuario.getEmail());
+            usuario.setUid(crearUsuario.getUid());
+            usuario.setNombres(crearUsuario.getNombres());
+            usuario.setEmail(crearUsuario.getEmail());
+            usuario.setImagenUrl(crearUsuario.getEmail());
             return usuario;
         };
     }

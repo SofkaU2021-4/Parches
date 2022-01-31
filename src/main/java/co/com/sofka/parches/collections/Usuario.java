@@ -4,8 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Document
@@ -13,7 +11,7 @@ public class Usuario {
     @Id
     private String id;
     private String uid;
-    @Size(min = 0, max = 50, message = "Maximo 50 caracteres")
+    @Size(max = 50, message = "Maximo 50 caracteres")
     private String nombres;
     @Indexed(unique = true)
     private String email;
