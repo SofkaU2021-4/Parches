@@ -28,7 +28,7 @@ public class ParcheDTO {
     @NonNull
     private UbicacionParche ubicacionParche;
 
-    private CapacidadParche cantidadParticipantes;
+    private CantidadParticipantes cantidadParticipantes;
 
     public ParcheDTO(){
 
@@ -139,11 +139,11 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
-    public CapacidadParche getCantidadParticipantes() {
+    public CantidadParticipantes getCantidadParticipantes() {
         return cantidadParticipantes;
     }
 
-    public void setCantidadParticipantes(CapacidadParche cantidadParticipantes) {
+    public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
         this.cantidadParticipantes = cantidadParticipantes;
     }
 
