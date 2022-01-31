@@ -20,7 +20,6 @@ public class Firebase {
                 .build();
 
         FirebaseApp.initializeApp(options);
-        System.out.println("Se conecto con FB");
     }
 
 }
