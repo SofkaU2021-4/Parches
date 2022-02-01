@@ -1,6 +1,7 @@
 package co.com.sofka.parches.utils;
 
 import co.com.sofka.parches.dtos.ParcheDTO;
+import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
 import co.com.sofka.parches.valueObjects.CapacidadParche;
 import co.com.sofka.parches.valueObjects.FechaParche;
@@ -29,10 +30,14 @@ public class ValidadorParche {
         return descripcionParche!=null;
     }
 
+    public static Boolean validarParcheHabilitado(Estado estado){
+        return estado== Estado.HABILITADO;
+    }
+
     public static Boolean validarUbicacionParche(UbicacionParche ubicacionParche){
         return ubicacionParche.getLat() != null && ubicacionParche.getLng() != null;
     }
-    public static ParcheDTO validarCrearParche(ParcheDTO parcheDTO){
+    public static ParcheDTO validarParche(ParcheDTO parcheDTO){
         if(Boolean.FALSE.equals(validarNombreParche(parcheDTO.getNombreParche()))){
             throw new IllegalArgumentException("Error: Nombre invalido");
         }
