@@ -144,10 +144,6 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
-    public CantidadParticipantes getCantidadParticipantes() {
-        return cantidadParticipantes;
-    }
-
     public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
         this.cantidadParticipantes = cantidadParticipantes;
     }
