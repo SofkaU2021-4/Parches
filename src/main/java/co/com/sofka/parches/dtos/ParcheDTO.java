@@ -5,6 +5,8 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
 import com.mongodb.lang.NonNull;
 
+import java.util.Optional;
+
 public class ParcheDTO {
 
     private String id;
@@ -25,7 +27,7 @@ public class ParcheDTO {
     private CapacidadParche capacidadMaxima;
     @NonNull
     private UbicacionParche ubicacionParche;
-
+    private CantidadParticipantes cantidadParticipantes;
     public ParcheDTO(){
 
     }
@@ -142,6 +144,18 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
+    public CantidadParticipantes getCantidadParticipantes() {
+        return cantidadParticipantes;
+    }
+
+    public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
+        this.cantidadParticipantes = cantidadParticipantes;
+    }
+
+    public CantidadParticipantes getCantidadParticipantes() {
+        return cantidadParticipantes;
+    }
+
     @Override
     public String toString() {
         return "ParcheDTO{" +
@@ -155,7 +169,8 @@ public class ParcheDTO {
                 ", estado=" + estado +
                 ", categoria=" + categoria +
                 ", capacidadMaxima=" + capacidadMaxima +
-                ", ubicacion=" + ubicacionParche +
+                ", ubicacionParche=" + ubicacionParche +
+                ", cantidadParticipantes=" + cantidadParticipantes +
                 '}';
     }
 }

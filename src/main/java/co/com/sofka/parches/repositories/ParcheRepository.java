@@ -7,8 +7,5 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface ParcheRepository extends ReactiveMongoRepository<Parche, String> {
-
-//    Flux<Parche> findAllByDuenoDelParcheA
-
-
+    Flux<Parche> findAllByDuenoDelParche(String duenoDelParche);
 }

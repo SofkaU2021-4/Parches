@@ -1,33 +1,31 @@
 package co.com.sofka.parches.routers;
 
-import co.com.sofka.parches.dtos.InscripcionDTO;
-import co.com.sofka.parches.useCases.CrearInscripcionUseCase;
+import co.com.sofka.parches.dtos.ParcheDTO;
+import co.com.sofka.parches.useCases.ListarMisParchesCreadosUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Mono;
-import java.util.function.Function;
-import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
 @Configuration
-public class InscripcionRouter {
+public class ListarMisParchesCreadosRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> crearInscripcion(CrearInscripcionUseCase crearInscripcionUseCase) {
-        return route(
-                POST("/crear-inscripcion/{parcheId}/{usuarioId}"),
+    public RouterFunction<ServerResponse> listarMisParchesCreados(ListarMisParchesCreadosUseCase listarMisParchesCreadosUseCase) {
+        return route(GET("/{usuarioId}/misParches"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(
-                                crearInscripcionUseCase.crearInscripcion(request.pathVariable("parcheId"),
+                                listarMisParchesCreadosUseCase.listarMisParchesCreados(
                                         request.pathVariable("usuarioId")),
-                                InscripcionDTO.class
-                        ))
+                                ParcheDTO.class))
+                        .onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
         );
     }
-}
 
+}
