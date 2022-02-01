@@ -2,10 +2,13 @@ package co.com.sofka.parches.routers.comentario;
 
 import co.com.sofka.parches.collections.Comentario;
 import co.com.sofka.parches.collections.Parche;
+import co.com.sofka.parches.collections.Usuario;
 import co.com.sofka.parches.dtos.ComentarioDTO;
 import co.com.sofka.parches.mappers.ComentarioMapper;
+import co.com.sofka.parches.mappers.MapperUtils;
 import co.com.sofka.parches.repositories.ComentarioRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
+import co.com.sofka.parches.repositories.UsuarioRepository;
 import co.com.sofka.parches.useCases.comentario.CrearComentarioUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,11 +26,12 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @WebFluxTest
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {CrearComentarioRouter.class, CrearComentarioUseCase.class, ComentarioMapper.class})
+@ContextConfiguration(classes = {CrearComentarioRouter.class, CrearComentarioUseCase.class, ComentarioMapper.class, MapperUtils.class})
 class CrearComentarioRouterTest {
 
     @MockBean
@@ -35,6 +39,9 @@ class CrearComentarioRouterTest {
 
     @MockBean
     private ParcheRepository parcheRepository;
+
+    @MockBean
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private WebTestClient webTestClient;
@@ -56,6 +63,11 @@ class CrearComentarioRouterTest {
                 comentario.getComentario());
         comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
 
+        var usuario = new Usuario("XXX",
+                "YYY",
+                "Migelito",
+                "migelito@gmail.com",
+                "tuimagen.com");
 
         var parche = new Parche();
         parche.setId("zzz");
@@ -63,6 +75,7 @@ class CrearComentarioRouterTest {
         Mono<Comentario> comentarioMono = Mono.just(comentario);
 
         Mockito.when(parcheRepository.findById("zzz")).thenReturn(Mono.just(parche));
+        Mockito.when(usuarioRepository.findByUid(anyString())).thenReturn(Mono.just(usuario));
         when(repository.save(any())).thenReturn(Mono.just(comentario));
 
         webTestClient.post()
@@ -81,6 +94,7 @@ class CrearComentarioRouterTest {
                     Assertions.assertThat(comentarioDTO1.getFechaCreacion()).isEqualTo(comentario.getFechaCreacion());
                 });
         Mockito.verify(parcheRepository,Mockito.times(1)).findById("zzz");
+        Mockito.verify(usuarioRepository,Mockito.times(1)).findByUid(anyString());
         Mockito.verify(repository,Mockito.times(1)).save(any());
     }
 
