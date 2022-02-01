@@ -5,10 +5,14 @@ import co.com.sofka.parches.dtos.InscripcionDTO;
 import co.com.sofka.parches.mappers.InscripcionMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.valueObjects.FechaParche;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
+@Service
+@Validated
 public class CrearInscripcionUseCase implements CrearInscripcion {
 
     private final InscripcionRepository inscripcionRepository;
