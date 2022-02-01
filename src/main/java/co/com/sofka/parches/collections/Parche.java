@@ -11,7 +11,6 @@ public class Parche {
 
     @Id
     private String id;
-
     private String duenoDelParche;
     private NombreParche nombreParche;
     private DescripcionParche descripcion;
