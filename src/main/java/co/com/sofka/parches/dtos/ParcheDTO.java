@@ -22,9 +22,7 @@ public class ParcheDTO {
     private UbicacionParche ubicacionParche;
     private CantidadParticipantes cantidadParticipantes;
 
-    public ParcheDTO(){
-
-    }
+    public ParcheDTO(){}
 
 
     public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull String nombreParche,
