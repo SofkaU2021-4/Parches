@@ -5,6 +5,7 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
+import co.com.sofka.parches.valueObjects.CantidadParticipantes;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
@@ -31,19 +32,19 @@ public class ListarMisParchesCreadosUseCase implements ListarMisParchesCreados {
         Objects.requireNonNull(duenoDelParche, "Id del dueño del parche es requerido");
         return parcheRepository.findAllByDuenoDelParche(duenoDelParche)
                 .filter(parcheDTO -> parcheDTO.getEstado().equals(Estado.HABILITADO))
-                .map(parcheMapper.mapToDTO());
-//                .flatMap(contarParticipantesParche());
+                .map(parcheMapper.mapToDTO())
+                .flatMap(contarParticipantesParche());
 
     }
 
-//    private Function<ParcheDTO, Flux<ParcheDTO>> contarParticipantesParche() {
-//        return parcheDto ->
-//                Flux.just(parcheDto).zipWith(
-//                        inscripcionRepository.findAllByParcheId(parcheDto.getId())
-//                                .collectList(),
-//                        (parche, inscripciones) -> {
-//                            parche.setCantidadParticipantes(inscripciones.size());
-//                            return parche;
-//                        });
-//    }
+    private Function<ParcheDTO, Flux<ParcheDTO>> contarParticipantesParche() {
+        return parcheDto ->
+                Flux.just(parcheDto).zipWith(
+                        inscripcionRepository.findAllByParcheId(parcheDto.getId())
+                                .collectList(),
+                        (parche, inscripciones) -> {
+                            parche.setCantidadParticipantes(new CantidadParticipantes((long) inscripciones.size()));
+                            return parche;
+                        });
+    }
 }
