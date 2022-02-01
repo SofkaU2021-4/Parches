@@ -1,39 +1,28 @@
-package co.com.sofka.parches.collections;
+package co.com.sofka.parches.dtos;
 
 import co.com.sofka.parches.valueObjects.FechaParche;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value="inscripciones")
-public class Inscripcion {
+public class InscripcionDTO {
 
-    @Id
     private String id;
     private String parcheId;
     private String usuarioId;
     private FechaParche fechaDeInscripcion;
 
-    public Inscripcion() {
+    public InscripcionDTO() {
     }
 
-    public Inscripcion(String parcheId,
-                       String usuarioId,
-                       FechaParche fechaDeInscripcion) {
-        this.parcheId = parcheId;
-        this.usuarioId = usuarioId;
-        this.fechaDeInscripcion = fechaDeInscripcion;
-    }
-
-    public Inscripcion(String id,
-                       String parcheId,
-                       String usuarioId,
-                       FechaParche fechaDeInscripcion) {
+    public InscripcionDTO(String id,
+                          String parcheId,
+                          String usuarioId,
+                          FechaParche fechaDeInscripcion) {
         this.id = id;
         this.parcheId = parcheId;
         this.usuarioId = usuarioId;
         this.fechaDeInscripcion = fechaDeInscripcion;
     }
-  
+
     public String getId() {
         return id;
     }
@@ -54,10 +43,6 @@ public class Inscripcion {
         return usuarioId;
     }
 
-    public FechaParche getFechaDeinscripcion() {
-        return fechaDeinscripcion;
-    }
-}
     public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
     }

@@ -5,6 +5,8 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
 import com.mongodb.lang.NonNull;
 
+import java.util.Optional;
+
 public class ParcheDTO {
 
     private String id;
@@ -12,14 +14,12 @@ public class ParcheDTO {
     private String duenoDelParche;
     @NonNull
     private NombreParche nombreParche;
-
     private DescripcionParche descripcion;
     private FechaParche fechaCreacion;
     @NonNull
     private FechaParche fechaInicio;
     @NonNull
     private FechaParche fechaFin;
-
     private Estado estado;
     @NonNull
     private Categoria categoria;
@@ -27,16 +27,21 @@ public class ParcheDTO {
     private CapacidadParche capacidadMaxima;
     @NonNull
     private UbicacionParche ubicacionParche;
-
     private CantidadParticipantes cantidadParticipantes;
-
     public ParcheDTO(){
 
     }
 
-    public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull String nombreParche,
-                     String descripcion, String fechaCreacion, @NonNull String fechaInicio,
-                     @NonNull String fechaFin, Estado estado, @NonNull Categoria categoria, @NonNull Long capacidadMaxima,
+    public ParcheDTO(String id,
+                     @NonNull String duenoDelParche,
+                     @NonNull String nombreParche,
+                     String descripcion,
+                     String fechaCreacion,
+                     @NonNull String fechaInicio,
+                     @NonNull String fechaFin,
+                     Estado estado,
+                     @NonNull Categoria categoria,
+                     @NonNull Long capacidadMaxima,
                      @NonNull UbicacionParche ubicacionParche) {
         this.id = id;
         this.duenoDelParche = duenoDelParche;
@@ -145,6 +150,10 @@ public class ParcheDTO {
 
     public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
         this.cantidadParticipantes = cantidadParticipantes;
+    }
+
+    public CantidadParticipantes getCantidadParticipantes() {
+        return cantidadParticipantes;
     }
 
     @Override
