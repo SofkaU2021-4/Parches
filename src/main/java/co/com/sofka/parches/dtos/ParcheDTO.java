@@ -5,6 +5,8 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
 import lombok.NonNull;
 
+import java.util.Optional;
+
 public class ParcheDTO {
 
     private String id;
@@ -134,6 +136,7 @@ public class ParcheDTO {
     }
 
     public CantidadParticipantes getCantidadParticipantes() {
+        this.cantidadParticipantes = Optional.ofNullable(cantidadParticipantes).orElse(new CantidadParticipantes((long) 0));
         return cantidadParticipantes;
     }
 
