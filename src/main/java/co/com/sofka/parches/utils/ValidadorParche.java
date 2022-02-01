@@ -25,7 +25,6 @@ public class ValidadorParche {
         return fechaInicio.esFechaAnterior(fechaFin);
     }
 
-
     public static Boolean validarDescripcionParche(DescripcionParche descripcionParche){
         return descripcionParche!=null;
     }
