@@ -27,7 +27,6 @@ public class CrearParcheUseCase implements CrearParche{
     @Override
     public Mono<ParcheDTO> crearParche(ParcheDTO parcheDTO) {
         parcheDTO.setFechaCreacion(new FechaParche(LocalDateTime.now().toString()));
-        System.out.println(parcheDTO.toString());
         return  parcheRepository.save(parcheMapper.mapToCollection().apply(ValidadorParche.validarCrearParche(parcheDTO)))
                 .map(parcheMapper.mapToDTO());
     }

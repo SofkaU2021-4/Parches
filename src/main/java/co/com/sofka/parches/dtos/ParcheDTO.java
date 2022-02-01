@@ -25,8 +25,8 @@ public class ParcheDTO {
 
     public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull String nombreParche,
                      String descripcion, String fechaCreacion, @NonNull String fechaInicio,
-                     @NonNull String fechaFin, Estado estado, @NonNull Categoria categoria, @NonNull Long capacidadMaxima,
-                     @NonNull UbicacionParche ubicacionParche) {
+                     @NonNull String fechaFin, @NonNull  Estado estado, @NonNull Categoria categoria,
+                     @NonNull Long capacidadMaxima, @NonNull UbicacionParche ubicacionParche) {
         this.id = id;
         this.duenoDelParche = duenoDelParche;
         this.nombreParche = new NombreParche(nombreParche);

@@ -1,10 +1,7 @@
 package co.com.sofka.parches.utils;
 
 import co.com.sofka.parches.dtos.ParcheDTO;
-import co.com.sofka.parches.valueObjects.CapacidadParche;
-import co.com.sofka.parches.valueObjects.DescripcionParche;
-import co.com.sofka.parches.valueObjects.FechaParche;
-import co.com.sofka.parches.valueObjects.NombreParche;
+import co.com.sofka.parches.valueObjects.*;
 
 public class ValidadorParche {
 
@@ -28,6 +25,10 @@ public class ValidadorParche {
         return descripcionParche!=null;
     }
 
+    public static Boolean validarUbicacionParche(UbicacionParche ubicacionParche){
+        return ubicacionParche.getX() != null && ubicacionParche.getY() != null;
+    }
+
     public static ParcheDTO validarCrearParche(ParcheDTO parcheDTO){
         if(Boolean.FALSE.equals(validarNombreParche(parcheDTO.getNombreParche()))){
             throw new IllegalArgumentException("Error: Nombre invalido");
@@ -44,6 +45,10 @@ public class ValidadorParche {
         if(Boolean.FALSE.equals(validarDescripcionParche(parcheDTO.getDescripcion()))){
             parcheDTO.setDescripcion(new DescripcionParche(""));
         }
+        if(Boolean.FALSE.equals(validarUbicacionParche(parcheDTO.getUbicacionParche()))){
+            throw new IllegalArgumentException("Error: tanto la latitud como la longitud deben ser no nulas");
+        }
+
         return parcheDTO;
     }
 
