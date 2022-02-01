@@ -23,11 +23,11 @@ class CrearUsuarioUseCaseTest {
     Validaciones validaciones;
     CrearUsuarioUseCase crearUsuarioUseCase;
 
-    private final String id = "xxxx";
-    private final String uid = "0000";
-    private final String nombres = "Felipe Rodriguez";
-    private final String email = "felipe@gmail.com";
-    private final String imagenUrl = "imagen";
+    private static final String id = "xxxx";
+    private static final String uid = "0000";
+    private static final String nombres = "Felipe Rodriguez";
+    private static final String email = "felipe@gmail.com";
+    private static final String imagenUrl = "imagen";
 
     UsuarioDTO usuarioDTO = new UsuarioDTO(
             id,

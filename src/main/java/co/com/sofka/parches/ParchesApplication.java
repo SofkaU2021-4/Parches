@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 @SpringBootApplication
 public class ParchesApplication {
 
-    final static Logger log = Logger.getLogger("principal");
+    static final Logger log = Logger.getLogger("principal");
 
     public static void main(String[] args) {
         SpringApplication.run(ParchesApplication.class, args);

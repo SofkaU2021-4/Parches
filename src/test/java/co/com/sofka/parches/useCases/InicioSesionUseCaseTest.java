@@ -19,11 +19,11 @@ class InicioSesionUseCaseTest {
     Validaciones validaciones;
     InicioSesionUseCase useCase;
 
-    private final String idMongo = "idMongo";
-    private final String uid = "IdentificacionUsuario";
-    private final String nombres = "Dairon Perilla";
-    private final String correo = "correo";
-    private final String imagen = "imagen";
+    private static final String idMongo = "idMongo";
+    private static final String uid = "IdentificacionUsuario";
+    private static final String nombres = "Dairon Perilla";
+    private static final String correo = "correo";
+    private static final String imagen = "imagen";
 
     @BeforeEach
     public void setUp() {
