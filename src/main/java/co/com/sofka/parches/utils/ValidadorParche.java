@@ -14,7 +14,7 @@ public class ValidadorParche {
     }
 
     public static Boolean validarNombreParche(NombreParche nombre){
-        return nombre.getValorNombre().length() <= 50 && nombre.getValorNombre().matches("[a-zA-z\\s]*");
+        return nombre.getValorNombre().length() <= 50 && nombre.getValorNombre().matches("[a-zA-z0-9\\s]*");
     }
 
     public static Boolean validarFechaInicioParche(FechaParche fechaCreacion, FechaParche fechaInicio){

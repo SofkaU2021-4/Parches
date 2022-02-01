@@ -4,7 +4,7 @@ import co.com.sofka.parches.valueObjects.FechaParche;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value="inscripciones")
+@Document
 public class Inscripcion {
 
     @Id
