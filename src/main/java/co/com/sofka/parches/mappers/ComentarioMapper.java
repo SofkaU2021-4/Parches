@@ -16,6 +16,7 @@ public class ComentarioMapper {
                 comentario.getParcheId(),
                 comentario.getComentario(),
                 comentario.getFechaCreacion());
+        //setear el setFechaCreacion
     }
 
     public Function<ComentarioDTO, Comentario> comentariomapToCollection(){

@@ -51,7 +51,7 @@ class CrearComentarioRouterTest {
                 comentario.getComentario(),
                 comentario.getFechaCreacion()
         );
-
+        //comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
         Mono<Comentario> comentarioMono = Mono.just(comentario);
 
         when(repository.save(any())).thenReturn(Mono.just(comentario));
