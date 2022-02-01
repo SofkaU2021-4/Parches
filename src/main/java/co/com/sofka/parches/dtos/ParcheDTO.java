@@ -4,8 +4,6 @@ import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
 import lombok.NonNull;
-import com.mongodb.lang.NonNull;
-import java.util.Optional;
 
 public class ParcheDTO {
 
