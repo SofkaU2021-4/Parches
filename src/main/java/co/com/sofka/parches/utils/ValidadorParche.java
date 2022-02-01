@@ -26,7 +26,7 @@ public class ValidadorParche {
     }
 
     public static Boolean validarUbicacionParche(UbicacionParche ubicacionParche){
-        return ubicacionParche.getX() != null && ubicacionParche.getY() != null;
+        return ubicacionParche.getLat() != null && ubicacionParche.getLng() != null;
     }
 
     public static ParcheDTO validarCrearParche(ParcheDTO parcheDTO){

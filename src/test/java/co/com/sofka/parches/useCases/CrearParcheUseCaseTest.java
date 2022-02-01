@@ -38,7 +38,7 @@ class CrearParcheUseCaseTest {
         parche.setEstado(Estado.HABILITADO);
         parche.setCategoria(Categoria.APRENDIZAJE);
         parche.setCapacidadMaxima(new CapacidadParche(10L));
-        parche.setUbicacion(new UbicacionParche(1.0, 1.0));
+        parche.setUbicacion(new UbicacionParche(1.0, 1.0, "aaa"));
 
         var parcheDTO = new ParcheDTO();
         parcheDTO.setId("xxxx");
@@ -50,7 +50,7 @@ class CrearParcheUseCaseTest {
         parcheDTO.setEstado(Estado.HABILITADO);
         parcheDTO.setCategoria(Categoria.APRENDIZAJE);
         parcheDTO.setCapacidadMaxima(new CapacidadParche(10L));
-        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0));
+        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0, "aaa"));
 
 
         Mockito.when(parcheRepository.save(Mockito.any())).thenReturn(Mono.just(parche));
@@ -66,8 +66,8 @@ class CrearParcheUseCaseTest {
                     assert parcheDTO1.getEstado().equals(Estado.HABILITADO);
                     assert parcheDTO1.getCategoria().equals(Categoria.APRENDIZAJE);
                     assert parcheDTO1.getCapacidadMaxima().getValorCapacidad().equals(10L);
-                    assert parcheDTO1.getUbicacionParche().getX().equals(1.0);
-                    assert parcheDTO1.getUbicacionParche().getY().equals(1.0);
+                    assert parcheDTO1.getUbicacionParche().getLat().equals(1.0);
+                    assert parcheDTO1.getUbicacionParche().getLng().equals(1.0);
                     return true;
                 })
                 .verifyComplete();

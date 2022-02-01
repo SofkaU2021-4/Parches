@@ -46,7 +46,7 @@ class CrearParcheRouterTest {
         parche.setEstado(Estado.HABILITADO);
         parche.setCategoria(Categoria.APRENDIZAJE);
         parche.setCapacidadMaxima(new CapacidadParche(10L));
-        parche.setUbicacion(new UbicacionParche(1.0, 1.0));
+        parche.setUbicacion(new UbicacionParche(1.0, 1.0, "aaa"));
 
         var parcheDTO = new ParcheDTO();
         parcheDTO.setId("xxxx");
@@ -58,7 +58,7 @@ class CrearParcheRouterTest {
         parcheDTO.setEstado(Estado.HABILITADO);
         parcheDTO.setCategoria(Categoria.APRENDIZAJE);
         parcheDTO.setCapacidadMaxima(new CapacidadParche(10L));
-        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0));
+        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0, "aaa"));
 
         Mockito.when(parcheRepository.save(Mockito.any())).thenReturn(Mono.just(parche));
 
@@ -80,8 +80,8 @@ class CrearParcheRouterTest {
                     Assertions.assertEquals(response.getEstado(), parche.getEstado());
                     Assertions.assertEquals(response.getCategoria(), parche.getCategoria());
                     Assertions.assertEquals(response.getCapacidadMaxima().getValorCapacidad(), parche.getCapacidadMaxima().getValorCapacidad());
-                    Assertions.assertEquals(response.getUbicacionParche().getX(), parche.getUbicacion().getX());
-                    Assertions.assertEquals(response.getUbicacionParche().getY(), parche.getUbicacion().getY());
+                    Assertions.assertEquals(response.getUbicacionParche().getLat(), parche.getUbicacion().getLat());
+                    Assertions.assertEquals(response.getUbicacionParche().getLng(), parche.getUbicacion().getLng());
                 });
 
         Mockito.verify(parcheRepository, Mockito.times(1)).save(Mockito.any());
