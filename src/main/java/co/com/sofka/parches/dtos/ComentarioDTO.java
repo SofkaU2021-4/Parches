@@ -21,8 +21,8 @@ public class ComentarioDTO {
         this.userId = userId;
         this.parcheId = parcheId;
         this.comentario = comentario;
-        //this.fechaCreacio = fechaCreacio;
-        this.fechaCreacion = LocalDateTime.now(ZoneId.of("America/Bogota"));
+        this.fechaCreacion = fechaCreacio;
+       // this.fechaCreacion = LocalDateTime.now(ZoneId.of("America/Bogota"));
         //LocalDateTime.now(ZoneId.of("America/Bogota"));
 
     }

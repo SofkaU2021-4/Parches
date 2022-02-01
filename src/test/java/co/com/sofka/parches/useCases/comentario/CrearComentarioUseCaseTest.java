@@ -34,7 +34,7 @@ class CrearComentarioUseCaseTest {
         comentario.setUserId("yyy");
         comentario.setParcheId("zzz");
         comentario.setComentario("prueba");
-        comentario.setFechaCreacion(LocalDateTime.of(2022, 01, 31, 16, 19, 29));
+        comentario.setFechaCreacion(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
 
         var comentarioDTO = new ComentarioDTO(
                 comentario.getId(),
@@ -51,7 +51,7 @@ class CrearComentarioUseCaseTest {
             assert comentario1.getUserId().equals("yyy");
             assert comentario1.getParcheId().equals("zzz");
             assert comentario1.getComentario().equals("prueba");
-            assert comentario1.getFechaCreacion().equals(LocalDateTime.of(2022, 01, 31, 16, 19, 29));
+            assert comentario1.getFechaCreacion().equals(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
             return true;
         }).verifyComplete();
     }
