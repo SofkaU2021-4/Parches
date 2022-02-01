@@ -9,4 +9,5 @@ import reactor.core.publisher.Mono;
 public interface ComentarioRepository extends ReactiveMongoRepository<Comentario, String> {
     Mono<Void> deleteByParcheId (String parcheId);
     Flux<Comentario> findByParcheId (String parcheId);
+    Mono<Void> deleteAllByParcheId(String parcheId);
 }

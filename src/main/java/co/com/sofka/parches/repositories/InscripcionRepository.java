@@ -12,4 +12,5 @@ public interface InscripcionRepository extends ReactiveMongoRepository<Inscripci
 
     Mono<Inscripcion> existsByIdAndUsuarioId(String parcheId, String userId);
     Mono<Inscripcion> findByParcheIdAndUsuarioId(String parcheId, String userId);
+    Mono<Void> deleteAllByParcheId(String parcheId);
 }
