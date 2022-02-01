@@ -1,6 +1,7 @@
 package co.com.sofka.parches.useCases;
 
 import co.com.sofka.parches.dtos.ParcheDTO;
+import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
@@ -29,8 +30,10 @@ public class ListarMisParchesCreadosUseCase implements ListarMisParchesCreados {
     public Flux<ParcheDTO> listarMisParchesCreados(String duenoDelParche) {
         Objects.requireNonNull(duenoDelParche, "Id del dueño del parche es requerido");
         return parcheRepository.findAllByDuenoDelParche(duenoDelParche)
+                .filter(parcheDTO -> parcheDTO.getEstado().equals(Estado.HABILITADO))
                 .map(parcheMapper.mapToDTO())
                 .flatMap(contarParticipantesParche());
+
     }
 
     private Function<ParcheDTO, Flux<ParcheDTO>> contarParticipantesParche() {
