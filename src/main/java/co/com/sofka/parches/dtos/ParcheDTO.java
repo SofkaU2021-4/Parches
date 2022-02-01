@@ -28,6 +28,7 @@ public class ParcheDTO {
     @NonNull
     private UbicacionParche ubicacionParche;
 
+    private CantidadParticipantes cantidadParticipantes;
     private Integer cantidadParticipantes;
 
     public ParcheDTO(){
@@ -146,6 +147,11 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
+    public CantidadParticipantes getCantidadParticipantes() {
+        return cantidadParticipantes;
+    }
+
+    public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
     public Integer getCantidadParticipantes() {
         this.cantidadParticipantes = Optional.ofNullable(cantidadParticipantes).orElse(0);
         return cantidadParticipantes;
