@@ -9,7 +9,7 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface InscripcionRepository extends ReactiveMongoRepository<Inscripcion, String> {
     Flux<Inscripcion> findAllByParcheId(String parcheId);
-
+    Mono<Long> countAllByParcheId(String parcheId);
     Mono<Inscripcion> existsByIdAndUsuarioId(String parcheId, String userId);
     Mono<Inscripcion> findByParcheIdAndUsuarioId(String parcheId, String userId);
     Mono<Void> deleteAllByParcheId(String parcheId);
