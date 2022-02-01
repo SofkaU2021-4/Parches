@@ -2,7 +2,6 @@ package co.com.sofka.parches.mappers;
 
 import co.com.sofka.parches.collections.Parche;
 import co.com.sofka.parches.dtos.ParcheDTO;
-import co.com.sofka.parches.valueObjects.DescripcionParche;
 import co.com.sofka.parches.dtos.DetallesParcheDTO;
 import org.springframework.stereotype.Component;
 

@@ -58,7 +58,7 @@ class EditarParcheUseCaseTest {
 
 
         Mockito.when(parcheRepository.findById(parche.getId())).thenReturn(Mono.just(parche));
-        Mockito.when(inscripcionRepository.countAllByParcheId(parche.getId())).thenReturn(Mono.just(2l));
+        Mockito.when(inscripcionRepository.countAllByParcheId(parche.getId())).thenReturn(Mono.just(2L));
         Mockito.when(parcheRepository.save(Mockito.any())).thenReturn(Mono.just(parche));
 
         StepVerifier.create(editarParcheUseCase.editarParche(parcheDTO))
@@ -114,7 +114,7 @@ class EditarParcheUseCaseTest {
 
 
         Mockito.when(parcheRepository.findById(parche.getId())).thenReturn(Mono.just(parche));
-        Mockito.when(inscripcionRepository.countAllByParcheId(parche.getId())).thenReturn(Mono.just(20l));
+        Mockito.when(inscripcionRepository.countAllByParcheId(parche.getId())).thenReturn(Mono.just(20L));
         Mockito.when(parcheRepository.save(Mockito.any())).thenReturn(Mono.just(parche));
 
         StepVerifier.create(editarParcheUseCase.editarParche(parcheDTO))
