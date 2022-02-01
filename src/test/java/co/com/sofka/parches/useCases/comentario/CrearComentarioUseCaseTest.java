@@ -1,8 +1,10 @@
 package co.com.sofka.parches.useCases.comentario;
 
 import co.com.sofka.parches.collections.Comentario;
+import co.com.sofka.parches.collections.Parche;
 import co.com.sofka.parches.dtos.ComentarioDTO;
 import co.com.sofka.parches.repositories.ComentarioRepository;
+import co.com.sofka.parches.repositories.ParcheRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,6 +25,9 @@ class CrearComentarioUseCaseTest {
     @MockBean
     private ComentarioRepository repository;
 
+    @MockBean
+    private ParcheRepository parcheRepository;
+
     @Autowired
     private CrearComentarioUseCase crearComentarioUseCase;
 
@@ -36,14 +41,18 @@ class CrearComentarioUseCaseTest {
         comentario.setComentario("prueba");
         comentario.setFechaCreacion(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
 
+
+        var parche = new Parche();
+        parche.setId("zzz");
+
         var comentarioDTO = new ComentarioDTO(
                 comentario.getId(),
                 comentario.getUserId(),
                 comentario.getParcheId(),
-                comentario.getComentario(),
-                comentario.getFechaCreacion()
-        );
+                comentario.getComentario());
+        comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
 
+        Mockito.when(parcheRepository.findById("zzz")).thenReturn(Mono.just(parche));
         Mockito.when(repository.save(any())).thenReturn(Mono.just(comentario));
 
         StepVerifier.create(crearComentarioUseCase.apply(comentarioDTO)).expectNextMatches(comentario1 -> {
@@ -54,6 +63,9 @@ class CrearComentarioUseCaseTest {
             assert comentario1.getFechaCreacion().equals(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
             return true;
         }).verifyComplete();
+
+        Mockito.verify(parcheRepository,Mockito.times(1)).findById("zzz");
+        Mockito.verify(repository,Mockito.times(1)).save(any());
     }
 
 }

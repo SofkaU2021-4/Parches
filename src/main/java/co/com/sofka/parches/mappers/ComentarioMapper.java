@@ -10,12 +10,16 @@ import java.util.function.Function;
 public class ComentarioMapper {
 
     public Function<Comentario, ComentarioDTO> comentariomapToDTO(){
-        return comentario -> new ComentarioDTO(
-                comentario.getId(),
-                comentario.getUserId(),
-                comentario.getParcheId(),
-                comentario.getComentario(),
-                comentario.getFechaCreacion());
+        return comentario ->
+        {
+            var comentariodto=new ComentarioDTO(
+                    comentario.getId(),
+                    comentario.getUserId(),
+                    comentario.getParcheId(),
+                    comentario.getComentario());
+            comentariodto.setFechaCreacion(comentario.getFechaCreacion());
+        return comentariodto;
+        };
     }
 
     public Function<ComentarioDTO, Comentario> comentariomapToCollection(){

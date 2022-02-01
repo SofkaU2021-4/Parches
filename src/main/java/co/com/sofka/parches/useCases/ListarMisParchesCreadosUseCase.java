@@ -5,6 +5,7 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
+import co.com.sofka.parches.valueObjects.CantidadParticipantes;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
@@ -42,7 +43,7 @@ public class ListarMisParchesCreadosUseCase implements ListarMisParchesCreados {
                         inscripcionRepository.findAllByParcheId(parcheDto.getId())
                                 .collectList(),
                         (parche, inscripciones) -> {
-                            parche.setCantidadParticipantes(inscripciones.size());
+                            parche.setCantidadParticipantes(new CantidadParticipantes((long) inscripciones.size()));
                             return parche;
                         });
     }
