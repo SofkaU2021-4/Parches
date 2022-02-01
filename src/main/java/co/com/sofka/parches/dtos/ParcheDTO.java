@@ -3,45 +3,32 @@ package co.com.sofka.parches.dtos;
 import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
+import lombok.NonNull;
 import com.mongodb.lang.NonNull;
-
 import java.util.Optional;
 
 public class ParcheDTO {
 
     private String id;
-    @NonNull
     private String duenoDelParche;
-    @NonNull
     private NombreParche nombreParche;
     private DescripcionParche descripcion;
     private FechaParche fechaCreacion;
-    @NonNull
     private FechaParche fechaInicio;
-    @NonNull
     private FechaParche fechaFin;
     private Estado estado;
-    @NonNull
     private Categoria categoria;
-    @NonNull
     private CapacidadParche capacidadMaxima;
-    @NonNull
     private UbicacionParche ubicacionParche;
     private CantidadParticipantes cantidadParticipantes;
 
     public ParcheDTO(){}
 
-    public ParcheDTO(String id,
-                     @NonNull String duenoDelParche,
-                     @NonNull String nombreParche,
-                     String descripcion,
-                     String fechaCreacion,
-                     @NonNull String fechaInicio,
-                     @NonNull String fechaFin,
-                     Estado estado,
-                     @NonNull Categoria categoria,
-                     @NonNull Long capacidadMaxima,
-                     @NonNull UbicacionParche ubicacionParche) {
+
+    public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull String nombreParche,
+                     String descripcion, String fechaCreacion, @NonNull String fechaInicio,
+                     @NonNull String fechaFin, @NonNull  Estado estado, @NonNull Categoria categoria,
+                     @NonNull Long capacidadMaxima, @NonNull UbicacionParche ubicacionParche) {
         this.id = id;
         this.duenoDelParche = duenoDelParche;
         this.nombreParche = new NombreParche(nombreParche);
@@ -143,6 +130,7 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
+
     public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
         this.cantidadParticipantes = cantidadParticipantes;
     }
@@ -164,8 +152,9 @@ public class ParcheDTO {
                 ", estado=" + estado +
                 ", categoria=" + categoria +
                 ", capacidadMaxima=" + capacidadMaxima +
-                ", ubicacionParche=" + ubicacionParche +
+                ", ubicacion=" + ubicacionParche +
                 ", cantidadParticipantes=" + cantidadParticipantes +
+
                 '}';
     }
 }
