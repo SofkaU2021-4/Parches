@@ -20,7 +20,7 @@ public class RouterParche {
     @Bean
     public RouterFunction<ServerResponse> obtenerParches(ObtenerParchesUseCase obtenerParchesUseCase){
         return route(
-                GET("/api/parches").and(accept(MediaType.APPLICATION_JSON)),
+                GET("/parches").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(obtenerParchesUseCase.apply(), ParcheDTO.class))

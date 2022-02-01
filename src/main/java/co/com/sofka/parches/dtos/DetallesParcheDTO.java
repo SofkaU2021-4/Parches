@@ -5,6 +5,7 @@ import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.valueObjects.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class DetallesParcheDTO {
 
@@ -20,6 +21,7 @@ public class DetallesParcheDTO {
     private UbicacionParche ubicacionParche;
     private Integer cantidadAsistentes;
     private Inscripcion inscripcion;
+    private List<ComentarioDTO> comentarioDTOS;
 
     public DetallesParcheDTO() {
     }
@@ -44,6 +46,14 @@ public class DetallesParcheDTO {
         this.categoria = categoria;
         this.capacidadMaxima = capacidadMaxima;
         this.ubicacionParche = ubicacionParche;
+    }
+
+    public List<ComentarioDTO> getComentarioDTOS() {
+        return comentarioDTOS;
+    }
+
+    public void setComentarioDTOS(List<ComentarioDTO> comentarioDTOS) {
+        this.comentarioDTOS = comentarioDTOS;
     }
 
     public String getId() {
