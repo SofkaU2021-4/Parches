@@ -1,9 +1,11 @@
 package co.com.sofka.parches.routers.comentario;
 
 import co.com.sofka.parches.collections.Comentario;
+import co.com.sofka.parches.collections.Parche;
 import co.com.sofka.parches.dtos.ComentarioDTO;
 import co.com.sofka.parches.mappers.ComentarioMapper;
 import co.com.sofka.parches.repositories.ComentarioRepository;
+import co.com.sofka.parches.repositories.ParcheRepository;
 import co.com.sofka.parches.useCases.comentario.CrearComentarioUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,6 +33,9 @@ class CrearComentarioRouterTest {
     @MockBean
     private ComentarioRepository repository;
 
+    @MockBean
+    private ParcheRepository parcheRepository;
+
     @Autowired
     private WebTestClient webTestClient;
 
@@ -48,12 +53,16 @@ class CrearComentarioRouterTest {
                 comentario.getId(),
                 comentario.getUserId(),
                 comentario.getParcheId(),
-                comentario.getComentario(),
-                comentario.getFechaCreacion()
-        );
-        //comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
+                comentario.getComentario());
+        comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
+
+
+        var parche = new Parche();
+        parche.setId("zzz");
+
         Mono<Comentario> comentarioMono = Mono.just(comentario);
 
+        Mockito.when(parcheRepository.findById("zzz")).thenReturn(Mono.just(parche));
         when(repository.save(any())).thenReturn(Mono.just(comentario));
 
         webTestClient.post()
@@ -71,7 +80,7 @@ class CrearComentarioRouterTest {
                     Assertions.assertThat(comentarioDTO1.getComentario()).isEqualTo(comentario.getComentario());
                     Assertions.assertThat(comentarioDTO1.getFechaCreacion()).isEqualTo(comentario.getFechaCreacion());
                 });
-
+        Mockito.verify(parcheRepository,Mockito.times(1)).findById("zzz");
         Mockito.verify(repository,Mockito.times(1)).save(any());
     }
 

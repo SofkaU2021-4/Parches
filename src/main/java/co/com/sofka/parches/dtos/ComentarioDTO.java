@@ -13,7 +13,7 @@ public class ComentarioDTO {
     private LocalDateTime fechaCreacion;
 
 
-    public ComentarioDTO(String id, String userId, String parcheId, String comentario, LocalDateTime fechaCreacio) {
+    public ComentarioDTO(String id, String userId, String parcheId, String comentario) {
         if(!(comentario.length() > 0 && comentario.length() <= 256)){
             throw new IllegalArgumentException("El comentario no debe contener mas de 256 caracteres");
         }
@@ -21,20 +21,9 @@ public class ComentarioDTO {
         this.userId = userId;
         this.parcheId = parcheId;
         this.comentario = comentario;
-        this.fechaCreacion = fechaCreacio;
     }
 
-//    public ComentarioDTO(String id, String userId, String parcheId, String comentario, UsuarioDTO usuario, LocalDateTime fechaCreacion) {
-//        if(!(comentario.length() > 0 && comentario.length() <= 256)){
-//            throw new IllegalArgumentException("El comentario no debe contener mas de 256 caracteres");
-//        }
-//        this.id = id;
-//        this.userId = userId;
-//        this.parcheId = parcheId;
-//        this.comentario = comentario;
-//        this.usuario = usuario;
-//        this.fechaCreacion = fechaCreacion;
-//    }
+
 
     public UsuarioDTO getUsuario() {
         return usuario;

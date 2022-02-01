@@ -27,7 +27,7 @@ public class EliminarComentarioUsecase implements Function<String, Mono<String>>
                 .flatMap(comentario -> {
                     return comentarioRepository.deleteById(comentario.getId()).thenReturn("Eliminado");
                 })
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND , "id Incorrecto")));
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST , "id Incorrecto")));
     }
 
 }
