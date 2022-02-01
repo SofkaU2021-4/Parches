@@ -2,6 +2,7 @@ package co.com.sofka.parches.mappers;
 
 import co.com.sofka.parches.collections.Parche;
 import co.com.sofka.parches.dtos.ParcheDTO;
+import co.com.sofka.parches.valueObjects.DescripcionParche;
 import co.com.sofka.parches.dtos.DetallesParcheDTO;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,8 @@ public class ParcheMapper {
         };
     }
 
+}
+
     public Function<Parche, DetallesParcheDTO> mapToDetallesParcheDTO(){
         return parche -> new DetallesParcheDTO(
                 parche.getId(),
@@ -57,3 +60,4 @@ public class ParcheMapper {
         );
     }
 }
+
