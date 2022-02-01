@@ -4,13 +4,15 @@ public class CapacidadParche {
 
     private Long valorCapacidad;
 
-    public CapacidadParche(){}
+    public CapacidadParche() {
+    }
 
-    public CapacidadParche(Long capacidad){
+    public CapacidadParche(Long capacidad) {
         this.valorCapacidad = capacidad;
     }
 
-    public Long getValorCapacidad(){
+    public Long getValorCapacidad() {
         return valorCapacidad;
     }
+}
 

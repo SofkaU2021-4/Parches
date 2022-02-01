@@ -43,8 +43,6 @@ public class ParcheMapper {
         };
     }
 
-}
-
     public Function<Parche, DetallesParcheDTO> mapToDetallesParcheDTO(){
         return parche -> new DetallesParcheDTO(
                 parche.getId(),
