@@ -74,7 +74,8 @@ class InicioSesionUseCaseTest {
                 .thenReturn(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)));
 
         StepVerifier.create(useCase.apply(uid))
-                .expectError(ResponseStatusException.class);
+                .expectError(ResponseStatusException.class)
+                .verify();
 
         Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(uid);
 
