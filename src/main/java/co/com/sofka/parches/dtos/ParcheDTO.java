@@ -4,6 +4,8 @@ import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.valueObjects.*;
 import lombok.NonNull;
+import com.mongodb.lang.NonNull;
+import java.util.Optional;
 
 public class ParcheDTO {
 
@@ -18,10 +20,12 @@ public class ParcheDTO {
     private Categoria categoria;
     private CapacidadParche capacidadMaxima;
     private UbicacionParche ubicacionParche;
+    private CantidadParticipantes cantidadParticipantes;
 
     public ParcheDTO(){
 
     }
+
 
     public ParcheDTO(String id, @NonNull String duenoDelParche, @NonNull String nombreParche,
                      String descripcion, String fechaCreacion, @NonNull String fechaInicio,
@@ -128,6 +132,15 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
+
+    public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
+        this.cantidadParticipantes = cantidadParticipantes;
+    }
+
+    public CantidadParticipantes getCantidadParticipantes() {
+        return cantidadParticipantes;
+    }
+
     @Override
     public String toString() {
         return "ParcheDTO{" +
@@ -142,6 +155,8 @@ public class ParcheDTO {
                 ", categoria=" + categoria +
                 ", capacidadMaxima=" + capacidadMaxima +
                 ", ubicacion=" + ubicacionParche +
+                ", cantidadParticipantes=" + cantidadParticipantes +
+
                 '}';
     }
 }

@@ -6,12 +6,13 @@ import co.com.sofka.parches.valueObjects.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 @Document(value="parches")
+
 public class Parche {
 
     @Id
     private String id;
-
     private String duenoDelParche;
     private NombreParche nombreParche;
     private DescripcionParche descripcion;
