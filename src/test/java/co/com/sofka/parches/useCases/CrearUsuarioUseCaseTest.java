@@ -23,18 +23,18 @@ class CrearUsuarioUseCaseTest {
     Validaciones validaciones;
     CrearUsuarioUseCase crearUsuarioUseCase;
 
-    private static final String id = "xxxx";
-    private static final String uid = "0000";
-    private static final String nombres = "Felipe Rodriguez";
-    private static final String email = "felipe@gmail.com";
-    private static final String imagenUrl = "imagen";
+    private static final String ID = "xxxx";
+    private static final String UID = "0000";
+    private static final String NOMBRES = "Felipe Rodriguez";
+    private static final String EMAIL = "felipe@gmail.com";
+    private static final String IMAGEN_URL = "imagen";
 
     UsuarioDTO usuarioDTO = new UsuarioDTO(
-            id,
-            uid,
-            nombres,
-            email,
-            imagenUrl
+            ID,
+            UID,
+            NOMBRES,
+            EMAIL,
+            IMAGEN_URL
     );
 
     @BeforeEach
@@ -60,11 +60,11 @@ class CrearUsuarioUseCaseTest {
 
         StepVerifier.create(crearUsuarioUseCase.apply(usuarioDTO))
                 .expectNextMatches(usuarioId -> {
-                    assert usuarioId.getId().equals(id);
-                    assert usuarioId.getUid().equals(uid);
-                    assert usuarioId.getNombres().equals(nombres);
-                    assert usuarioId.getEmail().equals(email);
-                    assert usuarioId.getImagenUrl().equals(imagenUrl);
+                    assert usuarioId.getId().equals(ID);
+                    assert usuarioId.getUid().equals(UID);
+                    assert usuarioId.getNombres().equals(NOMBRES);
+                    assert usuarioId.getEmail().equals(EMAIL);
+                    assert usuarioId.getImagenUrl().equals(IMAGEN_URL);
                     return true;
                 }).verifyComplete();
 
