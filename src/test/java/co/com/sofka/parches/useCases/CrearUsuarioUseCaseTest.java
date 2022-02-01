@@ -23,6 +23,20 @@ class CrearUsuarioUseCaseTest {
     Validaciones validaciones;
     CrearUsuarioUseCase crearUsuarioUseCase;
 
+    private final String id = "xxxx";
+    private final String uid = "0000";
+    private final String nombres = "Felipe Rodriguez";
+    private final String email = "felipe@gmail.com";
+    private final String imagenUrl = "imagen";
+
+    UsuarioDTO usuarioDTO = new UsuarioDTO(
+            id,
+            uid,
+            nombres,
+            email,
+            imagenUrl
+    );
+
     @BeforeEach
     void setup() {
         mapperUtils = new MapperUtils();
@@ -34,13 +48,6 @@ class CrearUsuarioUseCaseTest {
     @Test
     void crearUsuarioUseCaseTest() {
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO(
-                "xxxx",
-                "0000",
-                "Felipe Rodriguez",
-                "felipe@gmail.com",
-                "imagen"
-        );
 
         Usuario usuario1 = mapperUtils.mapperDTOaEntidadUsuario(null).apply(usuarioDTO);
 
@@ -53,11 +60,11 @@ class CrearUsuarioUseCaseTest {
 
         StepVerifier.create(crearUsuarioUseCase.apply(usuarioDTO))
                 .expectNextMatches(usuarioId -> {
-                    assert usuarioId.getId().equals("xxxx");
-                    assert usuarioId.getUid().equals("0000");
-                    assert usuarioId.getNombres().equals("Felipe Rodriguez");
-                    assert usuarioId.getEmail().equals("felipe@gmail.com");
-                    assert usuarioId.getImagenUrl().equals("imagen");
+                    assert usuarioId.getId().equals(id);
+                    assert usuarioId.getUid().equals(uid);
+                    assert usuarioId.getNombres().equals(nombres);
+                    assert usuarioId.getEmail().equals(email);
+                    assert usuarioId.getImagenUrl().equals(imagenUrl);
                     return true;
                 }).verifyComplete();
 
@@ -69,13 +76,6 @@ class CrearUsuarioUseCaseTest {
     @Test
     void crearUsuarioErrorUseCaseTest(){
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO(
-                "xxxx",
-                "0000",
-                "Felipe Rodriguez",
-                "felipe@gmail.com",
-                "imagen"
-        );
 
         Usuario usuario1 = mapperUtils.mapperDTOaEntidadUsuario(null).apply(usuarioDTO);
         Usuario usuario = mapperUtils.mapperDTOaEntidadUsuario("xxxx").apply(usuarioDTO);
@@ -86,7 +86,8 @@ class CrearUsuarioUseCaseTest {
                 .thenReturn(Mono.just(usuario1));
 
         StepVerifier.create(crearUsuarioUseCase.apply(usuarioDTO))
-                .expectError(ResponseStatusException.class);
+                .expectError(ResponseStatusException.class)
+                .verify();
 
         Mockito.verify(usuarioRepository).save(refEq(usuario1));
         Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid());

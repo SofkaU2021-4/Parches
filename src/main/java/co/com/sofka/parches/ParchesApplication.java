@@ -5,16 +5,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 @SpringBootApplication
 public class ParchesApplication {
+
+    final static Logger log = Logger.getLogger("principal");
 
     public static void main(String[] args) {
         SpringApplication.run(ParchesApplication.class, args);
         try {
             Firebase.inicializarFirebase();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 

@@ -1,7 +1,6 @@
 package co.com.sofka.parches.dtos;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Objects;
 
 public class UsuarioDTO {
     private String id;

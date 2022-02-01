@@ -1,9 +1,7 @@
 package co.com.sofka.parches.useCases;
 
-import co.com.sofka.parches.collections.Usuario;
 import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.mappers.MapperUtils;
-import co.com.sofka.parches.repositories.UsuarioRepository;
 import co.com.sofka.parches.utils.Validaciones;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,8 +26,8 @@ public class InicioSesionUseCase implements Function<String, Mono<UsuarioDTO>> {
     }
 
     @Override
-    public Mono<UsuarioDTO> apply(String UID) {
-        return validaciones.verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(UID)
+    public Mono<UsuarioDTO> apply(String uid) {
+        return validaciones.verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(uid)
                 .map(usuario -> mapper.mapperEntidadUsuarioaDTO().apply(usuario))
                 .onErrorResume(error -> Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)));
 

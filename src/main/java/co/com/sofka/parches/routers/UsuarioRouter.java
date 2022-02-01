@@ -20,7 +20,7 @@ public class UsuarioRouter {
 
     @Bean
     public RouterFunction<ServerResponse> createUser(CrearUsuarioUseCase useCase) {
-        Function<UsuarioDTO, Mono<ServerResponse>> executor = UsuarioDTO -> useCase.apply(UsuarioDTO)
+        Function<UsuarioDTO, Mono<ServerResponse>> executor = usuarioDto -> useCase.apply(usuarioDto)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(result));

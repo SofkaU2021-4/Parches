@@ -10,6 +10,9 @@ import java.io.IOException;
 public class Firebase {
 
 
+    private Firebase() {
+    }
+
     //TODO: Poner la ruta del archivo de firebase del proyecto a despliegue
     public static void inicializarFirebase() throws IOException {
         FileInputStream serviceAccount =

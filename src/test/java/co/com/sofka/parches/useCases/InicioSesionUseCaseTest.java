@@ -3,7 +3,6 @@ package co.com.sofka.parches.useCases;
 import co.com.sofka.parches.collections.Usuario;
 import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.mappers.MapperUtils;
-import co.com.sofka.parches.repositories.UsuarioRepository;
 import co.com.sofka.parches.utils.Validaciones;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.mockito.ArgumentMatchers.refEq;
 
 
 class InicioSesionUseCaseTest {
@@ -21,6 +19,11 @@ class InicioSesionUseCaseTest {
     Validaciones validaciones;
     InicioSesionUseCase useCase;
 
+    private final String idMongo = "idMongo";
+    private final String uid = "IdentificacionUsuario";
+    private final String nombres = "Dairon Perilla";
+    private final String correo = "correo";
+    private final String imagen = "imagen";
 
     @BeforeEach
     public void setUp() {
@@ -34,16 +37,14 @@ class InicioSesionUseCaseTest {
     void iniciarSesionCorrecto() {
         MapperUtils mapper = new MapperUtils();
 
-        String uid = "IdentificacionUsuario";
-
         UsuarioDTO respuesta = new UsuarioDTO();
-        respuesta.setId("idMongo");
+        respuesta.setId(idMongo);
         respuesta.setUid(uid);
-        respuesta.setNombres("Dairon Perilla");
-        respuesta.setEmail("correo");
-        respuesta.setImagenUrl("imagen");
+        respuesta.setNombres(nombres);
+        respuesta.setEmail(correo);
+        respuesta.setImagenUrl(imagen);
 
-        Usuario usuario = mapper.mapperDTOaEntidadUsuario("idMongo").apply(respuesta);
+        Usuario usuario = mapper.mapperDTOaEntidadUsuario(idMongo).apply(respuesta);
 
         Mockito.when(validaciones
                         .verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(Mockito.any()))
@@ -51,11 +52,11 @@ class InicioSesionUseCaseTest {
 
         StepVerifier.create(useCase.apply(uid))
                 .expectNextMatches(usuarioDTO -> {
-                    assert usuarioDTO.getId().equals("idMongo");
+                    assert usuarioDTO.getId().equals(idMongo);
                     assert usuarioDTO.getUid().equals(uid);
-                    assert usuarioDTO.getNombres().equals("Dairon Perilla");
-                    assert usuarioDTO.getEmail().equals("correo");
-                    assert usuarioDTO.getImagenUrl().equals("imagen");
+                    assert usuarioDTO.getNombres().equals(nombres);
+                    assert usuarioDTO.getEmail().equals(correo);
+                    assert usuarioDTO.getImagenUrl().equals(imagen);
                     return true;
                 })
                 .verifyComplete();
@@ -67,7 +68,6 @@ class InicioSesionUseCaseTest {
 
     @Test
     void iniciarSesionError() {
-        String uid = "IdentificacionUsuario";
 
         Mockito.when(validaciones
                         .verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(Mockito.any()))
