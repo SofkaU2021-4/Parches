@@ -31,19 +31,19 @@ public class ListarMisParchesCreadosUseCase implements ListarMisParchesCreados {
         Objects.requireNonNull(duenoDelParche, "Id del dueño del parche es requerido");
         return parcheRepository.findAllByDuenoDelParche(duenoDelParche)
                 .filter(parcheDTO -> parcheDTO.getEstado().equals(Estado.HABILITADO))
-                .map(parcheMapper.mapToDTO())
-                .flatMap(contarParticipantesParche());
+                .map(parcheMapper.mapToDTO());
+//                .flatMap(contarParticipantesParche());
 
     }
 
-    private Function<ParcheDTO, Flux<ParcheDTO>> contarParticipantesParche() {
-        return parcheDto ->
-                Flux.just(parcheDto).zipWith(
-                        inscripcionRepository.findAllByParcheId(parcheDto.getId())
-                                .collectList(),
-                        (parche, inscripciones) -> {
-                            parche.setCantidadParticipantes(inscripciones.size());
-                            return parche;
-                        });
-    }
+//    private Function<ParcheDTO, Flux<ParcheDTO>> contarParticipantesParche() {
+//        return parcheDto ->
+//                Flux.just(parcheDto).zipWith(
+//                        inscripcionRepository.findAllByParcheId(parcheDto.getId())
+//                                .collectList(),
+//                        (parche, inscripciones) -> {
+//                            parche.setCantidadParticipantes(inscripciones.size());
+//                            return parche;
+//                        });
+//    }
 }
