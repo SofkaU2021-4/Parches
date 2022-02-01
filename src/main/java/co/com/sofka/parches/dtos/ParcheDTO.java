@@ -27,9 +27,7 @@ public class ParcheDTO {
     private CapacidadParche capacidadMaxima;
     @NonNull
     private UbicacionParche ubicacionParche;
-
-    private Integer cantidadParticipantes;
-
+    private CantidadParticipantes cantidadParticipantes;
     public ParcheDTO(){
 
     }
@@ -146,13 +144,16 @@ public class ParcheDTO {
         this.ubicacionParche = ubicacionParche;
     }
 
-    public Integer getCantidadParticipantes() {
-        this.cantidadParticipantes = Optional.ofNullable(cantidadParticipantes).orElse(0);
+    public CantidadParticipantes getCantidadParticipantes() {
         return cantidadParticipantes;
     }
 
-    public void setCantidadParticipantes(Integer cantidadParticipantes) {
+    public void setCantidadParticipantes(CantidadParticipantes cantidadParticipantes) {
         this.cantidadParticipantes = cantidadParticipantes;
+    }
+
+    public CantidadParticipantes getCantidadParticipantes() {
+        return cantidadParticipantes;
     }
 
     @Override

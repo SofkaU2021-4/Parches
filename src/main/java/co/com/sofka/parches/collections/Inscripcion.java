@@ -33,7 +33,7 @@ public class Inscripcion {
         this.usuarioId = usuarioId;
         this.fechaDeInscripcion = fechaDeInscripcion;
     }
-
+  
     public String getId() {
         return id;
     }
@@ -54,6 +54,10 @@ public class Inscripcion {
         return usuarioId;
     }
 
+    public FechaParche getFechaDeinscripcion() {
+        return fechaDeinscripcion;
+    }
+}
     public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
     }
@@ -66,4 +70,3 @@ public class Inscripcion {
         this.fechaDeInscripcion = fechaDeInscripcion;
     }
 }
-
