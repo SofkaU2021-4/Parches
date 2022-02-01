@@ -33,7 +33,7 @@ public class Inscripcion {
         this.usuarioId = usuarioId;
         this.fechaDeInscripcion = fechaDeInscripcion;
     }
-
+  
     public String getId() {
         return id;
     }
