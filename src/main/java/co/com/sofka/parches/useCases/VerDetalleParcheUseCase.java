@@ -1,5 +1,6 @@
 package co.com.sofka.parches.useCases;
 
+import co.com.sofka.parches.collections.Inscripcion;
 import co.com.sofka.parches.dtos.ComentarioDTO;
 import co.com.sofka.parches.dtos.DetallesParcheDTO;
 import co.com.sofka.parches.mappers.ComentarioMapper;
@@ -46,18 +47,28 @@ public class VerDetalleParcheUseCase implements VerDetalleParche {
     @Override
     public Mono<DetallesParcheDTO> verDetalleParche(String parcheId, String userId) {
         return parcheRepository.findById(parcheId)
-                .zipWith(inscripcionRepository.findByParcheIdAndUsuarioId(parcheId, userId))
-                .zipWith(inscripcionRepository.findAll().count()).flatMap(datos -> {
-                    var extraccionDatos = datos.getT1();
-                    var extraccionDatos2 = datos.getT2();
+                .zipWith(inscripcionRepository.findByParcheIdAndUsuarioId(parcheId, userId)
+                        .switchIfEmpty(Mono.just(new Inscripcion())))
+                .zipWith(inscripcionRepository.findAllByParcheId(parcheId).count()
+                        .switchIfEmpty(Mono.just(0L)))
+                .flatMap(datos -> {
+                    var parche = datos.getT1().getT1();
+                    var cantidadAsistentes = datos.getT2();
+                    var inscripcion =datos.getT1().getT2();
+                    var duenoDelParcheId = usuarioRepository.findByUid(parche.getDuenoDelParche());
                     var detallesParcheDTO = parcheMapper.mapToDetallesParcheDTO()
-                            .apply(extraccionDatos.getT1());
-                    var inscripcion = extraccionDatos.getT2();
-                    detallesParcheDTO.setCantidadAsistentes(Math.toIntExact(extraccionDatos2));
+                            .apply(parche);
+                    detallesParcheDTO.setCantidadAsistentes(Math.toIntExact(cantidadAsistentes));
                     detallesParcheDTO.setInscripcion(inscripcion);
+                    return Mono.just(detallesParcheDTO).zipWith(duenoDelParcheId);
+                })
+                .flatMap(datos -> {
+                    var detallesParcheDTO = datos.getT1();
+                    var usuario = datos.getT2();
+                    detallesParcheDTO.setDuenoDelParche(usuarioMapper.mapperEntidadUsuarioaDTO().apply(usuario));
                     return Mono.just(detallesParcheDTO);
-                }
-                ).flatMap(getParcheDTOMonoFunction());
+                })
+                .flatMap(getParcheDTOMonoFunction());
     }
 
     private Function<DetallesParcheDTO, Mono<DetallesParcheDTO>> getParcheDTOMonoFunction() {
