@@ -1,8 +1,8 @@
 package co.com.sofka.parches.routers;
 
 import co.com.sofka.parches.dtos.InscripcionDTO;
-import co.com.sofka.parches.useCases.CancelarInscripcionUseCase;
-import co.com.sofka.parches.useCases.CrearInscripcionUseCase;
+import co.com.sofka.parches.usecases.CancelarInscripcionUseCase;
+import co.com.sofka.parches.usecases.CrearInscripcionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

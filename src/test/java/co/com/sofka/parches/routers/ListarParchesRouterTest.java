@@ -8,7 +8,7 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
-import co.com.sofka.parches.useCases.ListarParchesUseCase;
+import co.com.sofka.parches.usecases.ListarParchesUseCase;
 import co.com.sofka.parches.valueObjects.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @WebFluxTest
 @ExtendWith(SpringExtension.class)

@@ -3,7 +3,7 @@ package co.com.sofka.parches.routers.comentario;
 import co.com.sofka.parches.collections.Comentario;
 import co.com.sofka.parches.mappers.ComentarioMapper;
 import co.com.sofka.parches.repositories.ComentarioRepository;
-import co.com.sofka.parches.useCases.comentario.EliminarComentarioUsecase;
+import co.com.sofka.parches.usecases.comentario.EliminarComentarioUsecase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +17,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.when;
 

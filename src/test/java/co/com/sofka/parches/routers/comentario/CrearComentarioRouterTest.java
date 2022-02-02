@@ -9,7 +9,7 @@ import co.com.sofka.parches.mappers.MapperUtils;
 import co.com.sofka.parches.repositories.ComentarioRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
 import co.com.sofka.parches.repositories.UsuarioRepository;
-import co.com.sofka.parches.useCases.comentario.CrearComentarioUseCase;
+import co.com.sofka.parches.usecases.comentario.CrearComentarioUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
