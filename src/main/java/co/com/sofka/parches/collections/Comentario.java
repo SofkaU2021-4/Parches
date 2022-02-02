@@ -13,14 +13,14 @@ public class Comentario {
     private String id;
     private String userId;
     private String parcheId;
-    private String comentario;
+    private String mensaje;
     private LocalDateTime fechaCreacion;
 
-    public Comentario(String id, String userId, String parcheId, String comentario) {
+    public Comentario(String id, String userId, String parcheId, String mensaje) {
         this.id = id;
         this.userId = userId;
         this.parcheId = parcheId;
-        this.comentario = comentario;
+        this.mensaje = mensaje;
         this.fechaCreacion = LocalDateTime.now(ZoneId.of("America/Bogota"));
     }
 
@@ -51,12 +51,12 @@ public class Comentario {
         this.parcheId = parcheId;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     public LocalDateTime getFechaCreacion() {

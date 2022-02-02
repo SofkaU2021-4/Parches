@@ -1,7 +1,7 @@
 package co.com.sofka.parches.routers.comentario;
 
 import co.com.sofka.parches.dtos.ComentarioDTO;
-import co.com.sofka.parches.useCases.comentario.CrearComentarioUseCase;
+import co.com.sofka.parches.usecases.comentario.CrearComentarioUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

@@ -1,7 +1,7 @@
 package co.com.sofka.parches.routers;
 
 import co.com.sofka.parches.dtos.ParcheDTO;
-import co.com.sofka.parches.useCases.ListarMisParchesCreadosUseCase;
+import co.com.sofka.parches.usecases.ListarMisParchesCreadosUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
