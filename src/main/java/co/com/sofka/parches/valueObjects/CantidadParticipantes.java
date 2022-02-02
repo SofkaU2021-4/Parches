@@ -7,7 +7,7 @@ public class CantidadParticipantes {
 
     public CantidadParticipantes() {
     }
-
+  
     public CantidadParticipantes(Long valorCantidadParticipantes){
         this.valorCantidadParticipantes = valorCantidadParticipantes;
     }
