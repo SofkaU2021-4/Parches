@@ -1,11 +1,10 @@
 package co.com.sofka.parches.routers;
 
 import co.com.sofka.parches.dtos.ParcheDTO;
-import co.com.sofka.parches.useCases.ObtenerParchesUseCase;
+import co.com.sofka.parches.useCases.ListarParchesUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -15,15 +14,14 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-@RequestMapping
-public class RouterParche {
+public class ListarParchesRouter {
     @Bean
-    public RouterFunction<ServerResponse> obtenerParches(ObtenerParchesUseCase obtenerParchesUseCase){
+    public RouterFunction<ServerResponse> obtenerParches(ListarParchesUseCase listarParchesUseCase){
         return route(
                 GET("/parches").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(obtenerParchesUseCase.apply(), ParcheDTO.class))
+                        .body(BodyInserters.fromPublisher(listarParchesUseCase.apply(), ParcheDTO.class))
         );
     }
 }
