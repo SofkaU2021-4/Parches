@@ -33,13 +33,5 @@ public class CrearUsuarioUseCase implements CrearUsuario {
                         .apply(usuarioDTO))
                 )
                 .map(usuario -> mapperUtils.mapperEntidadUsuarioaDTO().apply((Usuario) usuario));
-      /*
-        return usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null)
-                        .apply(usuarioDTO))
-                .map(usuario -> mapperUtils
-                        .mapperEntidadUsuarioaDTO().apply((Usuario) usuario))
-                .onErrorResume(error -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)));
-                */
     }
-
 }

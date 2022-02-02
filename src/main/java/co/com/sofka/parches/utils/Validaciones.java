@@ -25,7 +25,7 @@ public class Validaciones {
     }
 
     public Mono<Usuario> verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(UsuarioDTO usuario) {
-        UserRecord userRecord = null;
+        UserRecord userRecord;
         try {
             userRecord = FirebaseAuth.getInstance().getUser(usuario.getUid());
 
@@ -37,8 +37,6 @@ public class Validaciones {
             log.warning(e.getMessage());
             return Mono.error(new ResponseStatusException(HttpStatus.CONFLICT));
         }
-
-
     }
 
     public Mono<Usuario> verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(String uid) {
