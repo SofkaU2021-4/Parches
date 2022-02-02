@@ -3,7 +3,10 @@ package co.com.sofka.parches.valueObjects;
 import java.util.Objects;
 
 public class CantidadParticipantes {
-    private final Long valorCantidadParticipantes;
+    private Long valorCantidadParticipantes;
+
+    public CantidadParticipantes() {
+    }
 
     public CantidadParticipantes(Long valorCantidadParticipantes){
         this.valorCantidadParticipantes = valorCantidadParticipantes;
