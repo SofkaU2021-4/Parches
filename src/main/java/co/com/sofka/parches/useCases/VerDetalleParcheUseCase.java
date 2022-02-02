@@ -88,7 +88,7 @@ public class VerDetalleParcheUseCase implements VerDetalleParche {
     private Function<ComentarioDTO, Mono<ComentarioDTO>> getUsuario() {
         return comentarioDTO -> Mono.just(comentarioDTO)
                 .zipWith(
-                        usuarioRepository.findById(comentarioDTO.getUserId())
+                        usuarioRepository.findByUid(comentarioDTO.getUserId())
                                 .map(usuarioMapper.mapperEntidadUsuarioaDTO()),
                         (comentario, usuario) -> {
                             comentario.setUsuario(usuario);

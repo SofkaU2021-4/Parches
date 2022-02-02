@@ -40,7 +40,5 @@ public class InscripcionRouter {
                                 Void.class))
         );
     }
-
-
 }
 
