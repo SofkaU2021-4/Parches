@@ -69,7 +69,7 @@ class CrearUsuarioUseCaseTest {
                 }).verifyComplete();
 
         Mockito.verify(usuarioRepository).save(refEq(usuario1));
-        Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO);
+        Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid());
 
     }
 
@@ -90,6 +90,6 @@ class CrearUsuarioUseCaseTest {
                 .verify();
 
         Mockito.verify(usuarioRepository).save(refEq(usuario1));
-        Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO);
+        Mockito.verify(validaciones).verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid());
     }
 }
