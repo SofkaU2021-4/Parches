@@ -59,7 +59,7 @@ class ListarMisParchesCreadosUseCaseTest {
                     assert parcheDTO.getUbicacionParche().getLat().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getLng().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getFormatted().equals("aaa");
-                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals((long) 0);
+                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals(0L);
 
 
                     return true;
@@ -78,7 +78,7 @@ class ListarMisParchesCreadosUseCaseTest {
                     assert parcheDTO.getUbicacionParche().getLat().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getLng().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getFormatted().equals("aaa");
-                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals((long) 0);
+                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals(0L);
 
                     return true;
                 }).verifyComplete();
@@ -111,7 +111,7 @@ class ListarMisParchesCreadosUseCaseTest {
                     assert parcheDTO.getUbicacionParche().getLat().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getLng().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getFormatted().equals("aaa");
-                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals((long) 3);
+                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals(3L);
 
 
                     return true;
@@ -130,7 +130,7 @@ class ListarMisParchesCreadosUseCaseTest {
                     assert parcheDTO.getUbicacionParche().getLat().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getLng().equals(1.0);
                     assert parcheDTO.getUbicacionParche().getFormatted().equals("aaa");
-                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals((long) 3);
+                    assert parcheDTO.getCantidadParticipantes().getValorCantidadParticipantes().equals(3L);
 
                     return true;
                 }).verifyComplete();
