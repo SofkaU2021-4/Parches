@@ -10,8 +10,10 @@ import co.com.sofka.parches.repositories.ComentarioRepository;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
 import co.com.sofka.parches.repositories.UsuarioRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
@@ -47,6 +49,7 @@ public class VerDetalleParcheUseCase implements VerDetalleParche {
     @Override
     public Mono<DetallesParcheDTO> verDetalleParche(String parcheId, String userId) {
         return parcheRepository.findById(parcheId)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST,"No se encontro el parche")))
                 .zipWith(inscripcionRepository.findByParcheIdAndUsuarioId(parcheId, userId)
                         .switchIfEmpty(Mono.just(new Inscripcion())))
                 .zipWith(inscripcionRepository.findAllByParcheId(parcheId).count()
@@ -54,7 +57,7 @@ public class VerDetalleParcheUseCase implements VerDetalleParche {
                 .flatMap(datos -> {
                     var parche = datos.getT1().getT1();
                     var cantidadAsistentes = datos.getT2();
-                    var inscripcion =datos.getT1().getT2();
+                    var inscripcion = datos.getT1().getT2();
                     var duenoDelParcheId = usuarioRepository.findByUid(parche.getDuenoDelParche());
                     var detallesParcheDTO = parcheMapper.mapToDetallesParcheDTO()
                             .apply(parche);
