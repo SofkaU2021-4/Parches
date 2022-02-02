@@ -3,7 +3,6 @@ package co.com.sofka.parches.useCases;
 import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.mappers.MapperUtils;
 import co.com.sofka.parches.utils.Validaciones;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -12,7 +11,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
-@Slf4j
 @Service
 @Validated
 public class InicioSesionUseCase implements Function<String, Mono<UsuarioDTO>> {
@@ -30,7 +28,5 @@ public class InicioSesionUseCase implements Function<String, Mono<UsuarioDTO>> {
         return validaciones.verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(uid)
                 .map(usuario -> mapper.mapperEntidadUsuarioaDTO().apply(usuario))
                 .onErrorResume(error -> Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)));
-
-
     }
 }

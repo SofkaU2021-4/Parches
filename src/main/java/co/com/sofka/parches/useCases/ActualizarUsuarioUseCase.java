@@ -1,6 +1,5 @@
 package co.com.sofka.parches.useCases;
 
-import co.com.sofka.parches.dtos.ComentarioDTO;
 import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.mappers.MapperUtils;
 import co.com.sofka.parches.repositories.UsuarioRepository;
@@ -28,10 +27,8 @@ public class ActualizarUsuarioUseCase implements Function<UsuarioDTO, Mono<Usuar
     @Override
     public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
        return usuarioRepository.findById(usuarioDTO.getId())
-            .flatMap(usuario -> {
-    return usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(usuarioDTO.getId()).apply(usuarioDTO))
-            .map(mapperUtils.mapperEntidadUsuarioaDTO());
-})
+            .flatMap(usuario -> usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(usuarioDTO.getId()).apply(usuarioDTO))
+                    .map(mapperUtils.mapperEntidadUsuarioaDTO()))
         .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND , "Usuario no Existe")));
 }
 

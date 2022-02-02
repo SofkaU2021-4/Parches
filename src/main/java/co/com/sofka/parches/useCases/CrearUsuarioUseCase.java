@@ -26,19 +26,12 @@ public class CrearUsuarioUseCase implements CrearUsuario {
 
     @Override
     public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
-      /*  return validaciones
-                .verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO.getUid())
-                .flatMap(usuario -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)))
+        return validaciones
+                .verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(usuarioDTO)
+                .flatMap(error -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)))
                 .switchIfEmpty(usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null)
                         .apply(usuarioDTO))
-                )*/
-        ///
-        return usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(null)
-                        .apply(usuarioDTO))
-                ///
-                .map(usuario -> mapperUtils
-                        .mapperEntidadUsuarioaDTO().apply((Usuario) usuario))
-                .onErrorResume(error -> Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)));
+                )
+                .map(usuario -> mapperUtils.mapperEntidadUsuarioaDTO().apply((Usuario) usuario));
     }
-
 }
