@@ -25,7 +25,7 @@ public class Usuario {
         this.uid = uid;
         this.nombres = nombres;
         this.email = email;
-        this.imagenUrl=imagenUrl;
+        this.imagenUrl = imagenUrl;
     }
 
     public String getId() {

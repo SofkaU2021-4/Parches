@@ -2,9 +2,11 @@ package co.com.sofka.parches.useCases.comentario;
 
 import co.com.sofka.parches.collections.Comentario;
 import co.com.sofka.parches.collections.Parche;
+import co.com.sofka.parches.collections.Usuario;
 import co.com.sofka.parches.dtos.ComentarioDTO;
 import co.com.sofka.parches.repositories.ComentarioRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
+import co.com.sofka.parches.repositories.UsuarioRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -18,6 +20,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
 class CrearComentarioUseCaseTest {
@@ -27,6 +30,9 @@ class CrearComentarioUseCaseTest {
 
     @MockBean
     private ParcheRepository parcheRepository;
+
+    @MockBean
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private CrearComentarioUseCase crearComentarioUseCase;
@@ -41,6 +47,11 @@ class CrearComentarioUseCaseTest {
         comentario.setComentario("prueba");
         comentario.setFechaCreacion(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
 
+        var usuario = new Usuario("XXX",
+                "YYY",
+                "Migelito",
+                "migelito@gmail.com",
+                "tuimagen.com");
 
         var parche = new Parche();
         parche.setId("zzz");
@@ -53,6 +64,7 @@ class CrearComentarioUseCaseTest {
         comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
 
         Mockito.when(parcheRepository.findById("zzz")).thenReturn(Mono.just(parche));
+        Mockito.when(usuarioRepository.findByUid(anyString())).thenReturn(Mono.just(usuario));
         Mockito.when(repository.save(any())).thenReturn(Mono.just(comentario));
 
         StepVerifier.create(crearComentarioUseCase.apply(comentarioDTO)).expectNextMatches(comentario1 -> {
@@ -65,6 +77,7 @@ class CrearComentarioUseCaseTest {
         }).verifyComplete();
 
         Mockito.verify(parcheRepository,Mockito.times(1)).findById("zzz");
+        Mockito.verify(usuarioRepository,Mockito.times(1)).findByUid(anyString());
         Mockito.verify(repository,Mockito.times(1)).save(any());
     }
 
