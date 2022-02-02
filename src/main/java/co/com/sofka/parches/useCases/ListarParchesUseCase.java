@@ -12,12 +12,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Validated
-public class ObtenerParchesUseCase {
+public class ListarParchesUseCase {
     private final ParcheRepository parcheRepository;
     private final ParcheMapper parcheMapper;
     private final InscripcionRepository inscripcionRepository;
 
-    public ObtenerParchesUseCase(ParcheRepository parcheRepository, ParcheMapper parcheMapper, InscripcionRepository inscripcionRepository) {
+    public ListarParchesUseCase(ParcheRepository parcheRepository, ParcheMapper parcheMapper, InscripcionRepository inscripcionRepository) {
         this.parcheRepository = parcheRepository;
         this.parcheMapper = parcheMapper;
         this.inscripcionRepository = inscripcionRepository;
