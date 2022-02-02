@@ -4,13 +4,12 @@ import co.com.sofka.parches.collections.Inscripcion;
 import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.valueObjects.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class DetallesParcheDTO {
 
     private String id;
-    private String duenoDelParche;
+    private UsuarioDTO duenoDelParche;
     private NombreParche nombreParche;
     private DescripcionParche descripcion;
     private FechaParche fechaDeCreacion;
@@ -27,7 +26,6 @@ public class DetallesParcheDTO {
     }
 
     public DetallesParcheDTO(String id,
-                             String duenoDelParche,
                              NombreParche nombreParche,
                              DescripcionParche descripcion,
                              FechaParche fechaDeCreacion,
@@ -37,7 +35,6 @@ public class DetallesParcheDTO {
                              CapacidadParche capacidadMaxima,
                              UbicacionParche ubicacionParche) {
         this.id = id;
-        this.duenoDelParche = duenoDelParche;
         this.nombreParche = nombreParche;
         this.descripcion = descripcion;
         this.fechaDeCreacion = fechaDeCreacion;
@@ -64,11 +61,11 @@ public class DetallesParcheDTO {
         this.id = id;
     }
 
-    public String getDuenoDelParche() {
+    public UsuarioDTO getDuenoDelParche() {
         return duenoDelParche;
     }
 
-    public void setDuenoDelParche(String duenoDelParche) {
+    public void setDuenoDelParche(UsuarioDTO duenoDelParche) {
         this.duenoDelParche = duenoDelParche;
     }
 
@@ -150,5 +147,24 @@ public class DetallesParcheDTO {
 
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcion = inscripcion;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DetallesParcheDTO{" +
+                "id='" + id + '\'' +
+                ", duenoDelParche='" + duenoDelParche + '\'' +
+                ", nombreParche=" + nombreParche +
+                ", descripcion=" + descripcion +
+                ", fechaDeCreacion=" + fechaDeCreacion +
+                ", fechaDeInicio=" + fechaDeInicio +
+                ", fechaFin=" + fechaFin +
+                ", categoria=" + categoria +
+                ", capacidadMaxima=" + capacidadMaxima +
+                ", ubicacionParche=" + ubicacionParche +
+                ", cantidadAsistentes=" + cantidadAsistentes +
+                ", inscripcion=" + inscripcion +
+                '}';
     }
 }
