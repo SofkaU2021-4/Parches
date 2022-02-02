@@ -1,6 +1,7 @@
 package co.com.sofka.parches.utils;
 
 import co.com.sofka.parches.collections.Usuario;
+import co.com.sofka.parches.dtos.UsuarioDTO;
 import co.com.sofka.parches.repositories.UsuarioRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -23,15 +24,28 @@ public class Validaciones {
         this.repositorio = repositorio;
     }
 
-    public Mono<Usuario> verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(String uid) {
-        return verificarExistencia(uid);
+    public Mono<Usuario> verificarExistenciaUsuarioMongoYFirebaseParaCrearUsuario(UsuarioDTO usuario) {
+        UserRecord userRecord = null;
+        try {
+            userRecord = FirebaseAuth.getInstance().getUser(usuario.getUid());
+
+            if (userRecord == null || !userRecord.getEmail().equals(usuario.getEmail())) {
+                return Mono.error(new ResponseStatusException(HttpStatus.CONFLICT));
+            }
+            return repositorio.findByUid(usuario.getUid());
+        } catch (FirebaseAuthException e) {
+            log.warning(e.getMessage());
+            return Mono.error(new ResponseStatusException(HttpStatus.CONFLICT));
+        }
+
+
     }
 
     public Mono<Usuario> verificarExistenciaUsuarioMongoYFirebaseParaIniciarSesion(String uid) {
         return verificarExistencia(uid)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.CONFLICT)));
-    }
 
+    }
 
 
     private Mono<Usuario> verificarExistencia(String uid) {
@@ -43,7 +57,7 @@ public class Validaciones {
         }
 
         if (userRecord == null) {
-            return Mono.error(new ResponseStatusException(HttpStatus.CONFLICT));
+            return Mono.empty();
         }
 
         return repositorio.findByUid(uid);
