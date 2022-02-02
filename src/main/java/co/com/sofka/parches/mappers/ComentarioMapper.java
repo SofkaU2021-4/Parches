@@ -16,20 +16,20 @@ public class ComentarioMapper {
                     comentario.getId(),
                     comentario.getUserId(),
                     comentario.getParcheId(),
-                    comentario.getComentario());
+                    comentario.getMensaje());
             comentariodto.setFechaCreacion(comentario.getFechaCreacion());
         return comentariodto;
         };
     }
 
     public Function<ComentarioDTO, Comentario> comentariomapToCollection(){
-        return ComentarioDTO -> {
+        return comentariodto -> {
             Comentario comentario = new Comentario();
-            comentario.setId(ComentarioDTO.getId());
-            comentario.setUserId(ComentarioDTO.getUserId());
-            comentario.setParcheId(ComentarioDTO.getParcheId());
-            comentario.setComentario(ComentarioDTO.getComentario());
-            comentario.setFechaCreacion(ComentarioDTO.getFechaCreacion());
+            comentario.setId(comentariodto.getId());
+            comentario.setUserId(comentariodto.getUserId());
+            comentario.setParcheId(comentariodto.getParcheId());
+            comentario.setMensaje(comentariodto.getMensaje());
+            comentario.setFechaCreacion(comentariodto.getFechaCreacion());
             return comentario;
         };
     }

@@ -7,7 +7,7 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
-import co.com.sofka.parches.useCases.EditarParcheUseCase;
+import co.com.sofka.parches.usecases.EditarParcheUseCase;
 import co.com.sofka.parches.valueObjects.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

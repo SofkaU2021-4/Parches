@@ -5,7 +5,7 @@ import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.ComentarioRepository;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
-import co.com.sofka.parches.useCases.EliminarParcheUseCase;
+import co.com.sofka.parches.usecases.EliminarParcheUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;

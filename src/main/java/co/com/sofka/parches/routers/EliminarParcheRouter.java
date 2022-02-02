@@ -1,6 +1,6 @@
 package co.com.sofka.parches.routers;
 
-import co.com.sofka.parches.useCases.EliminarParcheUseCase;
+import co.com.sofka.parches.usecases.EliminarParcheUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
