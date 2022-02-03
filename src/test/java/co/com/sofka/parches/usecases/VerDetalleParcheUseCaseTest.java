@@ -1,4 +1,4 @@
-package co.com.sofka.parches.useCases;
+package co.com.sofka.parches.usecases;
 
 import co.com.sofka.parches.collections.Comentario;
 import co.com.sofka.parches.collections.Inscripcion;
@@ -64,8 +64,8 @@ class VerDetalleParcheUseCaseTest {
 
         when(parcheRepository.findById(parcheId())).thenReturn(Mono.just(parche()));
         when(usuarioRepository.findByUid(duenoDelParche())).thenReturn(Mono.just(usuarioDuenoParche()));
-        when(usuarioRepository.findById("usuario02")).thenReturn(Mono.just(usuarioPrueba1()));
-        when(usuarioRepository.findById("usuario03")).thenReturn(Mono.just(usuarioPrueba2()));
+        when(usuarioRepository.findByUid("usuario02")).thenReturn(Mono.just(usuarioPrueba1()));
+        when(usuarioRepository.findByUid("usuario03")).thenReturn(Mono.just(usuarioPrueba2()));
         when(comentarioRepository.findByParcheId(parcheId())).thenReturn(Flux.fromIterable(listaComentarios()));
         when(inscripcionRepository.findAllByParcheId(parcheId())).thenReturn(Flux.just(inscripcion()));
         when(inscripcionRepository.findByParcheIdAndUsuarioId(any(),any())).thenReturn(Mono.just(inscripcion()));
@@ -92,8 +92,8 @@ class VerDetalleParcheUseCaseTest {
                     assert detallesParcheDTO.getInscripcion().getFechaDeInscripcion().getValorFecha().toString().equals("2022-02-01T21:06:42.140");
                     assert detallesParcheDTO.getInscripcion().getId().equals("inscripcion0001");
                     assert detallesParcheDTO.getInscripcion().getUsuarioId().equals("uia002");
-                    assert detallesParcheDTO.getComentarioDTOS().get(0).getComentario().equals("comentario numero 1");
-                    assert detallesParcheDTO.getComentarioDTOS().get(1).getComentario().equals("comentario numero 2");
+                    assert detallesParcheDTO.getComentarioDTOS().get(0).getMensaje().equals("comentario numero 1");
+                    assert detallesParcheDTO.getComentarioDTOS().get(1).getMensaje().equals("comentario numero 2");
                     return true;
                 })
                 .verifyComplete();
@@ -101,8 +101,7 @@ class VerDetalleParcheUseCaseTest {
         verify(comentarioRepository).findByParcheId(any());
         verify(inscripcionRepository).findAllByParcheId(any());
         verify(inscripcionRepository).findByParcheIdAndUsuarioId(any(),any());
-        Mockito.verify(usuarioRepository, Mockito.times(1)).findByUid(duenoDelParche());
-        Mockito.verify(usuarioRepository, Mockito.times(2)).findById((String) any());
+        Mockito.verify(usuarioRepository, Mockito.times(3)).findByUid(any());
     }
 
     private Parche parche() {
