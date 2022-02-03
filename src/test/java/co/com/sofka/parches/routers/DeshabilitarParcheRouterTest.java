@@ -37,34 +37,47 @@ class DeshabilitarParcheRouterTest {
     @Autowired
     private WebTestClient webTestClient;
 
+    private static final String NOMBRE_PARCHE_DESHABILITAR_PARCHE_ROUTER = "parche de prueba";
+    private static final String DESCRIPCION_DESHABILITAR_PARCHE_ROUTER = "descripcion de prueba";
+    private static final String FECHA_CREACION_DESHABILITAR_PARCHE_ROUTER = "2022-12-12T08:59:11.332";
+    private static final String FECHA_INICIO_DESHABILITAR_PARCHE_ROUTER = "2022-12-12T10:59:11.332";
+    private static final String FECHA_FIN_DESHABILITAR_PARCHE_ROUTER = "2022-12-12T12:59:11.332";
+    private static final Estado ESTADO_DESHABILITAR_PARCHE_ROUTER = Estado.DESHABILITADO;
+    private static final Estado ESTADO_HABILITADO_DESHABILITAR_PARCHE_ROUTER = Estado.HABILITADO;
+    private static final Categoria CATEGORIA_DESHABILITAR_PARCHE_ROUTER = Categoria.CONFERENCIAS;
+    private static final Long CAPACIDAD_DESHABILITAR_PARCHE_ROUTER = 10L;
+    private static final Double LAT_DESHABILITAR_PARCHE_ROUTER = 1.0;
+    private static final Double LNG_DESHABILITAR_PARCHE_ROUTER = 1.0;
+    private static final String DIRECCION_DESHABILITAR_PARCHE_ROUTER = "aaa";
+
     @Test
     void deshabilitarParcheRouterTest(){
 
         var parche = new Parche();
-        parche.setId("xxxx");
-        parche.setDuenoDelParche("yyyy");
-        parche.setNombreParche(new NombreParche("parche de prueba"));
-        parche.setDescripcion(new DescripcionParche("descripcion de prueba"));
-        parche.setFechaCreacion(new FechaParche("2022-12-12T08:59:11.332"));
-        parche.setFechaInicio(new FechaParche("2022-12-12T10:59:11.332"));
-        parche.setFechaFin(new FechaParche("2022-12-12T12:59:11.332"));
-        parche.setEstado(Estado.DESHABILITADO);
-        parche.setCategoria(Categoria.APRENDIZAJE);
-        parche.setCapacidadMaxima(new CapacidadParche(10L));
-        parche.setUbicacion(new UbicacionParche(1.0, 1.0, "aaa"));
+        parche.setId("1234");
+        parche.setDuenoDelParche("SOY EL DUEÑO");
+        parche.setNombreParche(new NombreParche(NOMBRE_PARCHE_DESHABILITAR_PARCHE_ROUTER));
+        parche.setDescripcion(new DescripcionParche(DESCRIPCION_DESHABILITAR_PARCHE_ROUTER));
+        parche.setFechaCreacion(new FechaParche(FECHA_CREACION_DESHABILITAR_PARCHE_ROUTER));
+        parche.setFechaInicio(new FechaParche(FECHA_INICIO_DESHABILITAR_PARCHE_ROUTER));
+        parche.setFechaFin(new FechaParche(FECHA_FIN_DESHABILITAR_PARCHE_ROUTER));
+        parche.setEstado(ESTADO_DESHABILITAR_PARCHE_ROUTER);
+        parche.setCategoria(CATEGORIA_DESHABILITAR_PARCHE_ROUTER);
+        parche.setCapacidadMaxima(new CapacidadParche(CAPACIDAD_DESHABILITAR_PARCHE_ROUTER));
+        parche.setUbicacion(new UbicacionParche(LAT_DESHABILITAR_PARCHE_ROUTER, LNG_DESHABILITAR_PARCHE_ROUTER, DIRECCION_DESHABILITAR_PARCHE_ROUTER));
 
         var parcheDTO = new ParcheDTO();
-        parcheDTO.setId("xxxx");
-        parcheDTO.setDuenoDelParche("yyyy");
-        parcheDTO.setNombreParche(new NombreParche("parche de prueba"));
-        parcheDTO.setDescripcion(new DescripcionParche("descripcion de prueba"));
-        parcheDTO.setFechaCreacion(new FechaParche("2022-12-12T08:59:11.332"));
-        parcheDTO.setFechaInicio(new FechaParche("2022-12-12T10:59:11.332"));
-        parcheDTO.setFechaFin(new FechaParche("2022-12-12T12:59:11.332"));
-        parcheDTO.setEstado(Estado.HABILITADO);
-        parcheDTO.setCategoria(Categoria.APRENDIZAJE);
-        parcheDTO.setCapacidadMaxima(new CapacidadParche(10L));
-        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0, "aaa"));
+        parcheDTO.setId("1234");
+        parcheDTO.setDuenoDelParche("SOY EL DUEÑO");
+        parcheDTO.setNombreParche(new NombreParche(NOMBRE_PARCHE_DESHABILITAR_PARCHE_ROUTER));
+        parcheDTO.setDescripcion(new DescripcionParche(DESCRIPCION_DESHABILITAR_PARCHE_ROUTER));
+        parcheDTO.setFechaCreacion(new FechaParche(FECHA_CREACION_DESHABILITAR_PARCHE_ROUTER));
+        parcheDTO.setFechaInicio(new FechaParche(FECHA_INICIO_DESHABILITAR_PARCHE_ROUTER));
+        parcheDTO.setFechaFin(new FechaParche(FECHA_FIN_DESHABILITAR_PARCHE_ROUTER));
+        parcheDTO.setEstado(ESTADO_HABILITADO_DESHABILITAR_PARCHE_ROUTER);
+        parcheDTO.setCategoria(CATEGORIA_DESHABILITAR_PARCHE_ROUTER);
+        parcheDTO.setCapacidadMaxima(new CapacidadParche(CAPACIDAD_DESHABILITAR_PARCHE_ROUTER));
+        parcheDTO.setUbicacionParche(new UbicacionParche(LAT_DESHABILITAR_PARCHE_ROUTER, LNG_DESHABILITAR_PARCHE_ROUTER, DIRECCION_DESHABILITAR_PARCHE_ROUTER));
 
         Mockito.when(parcheRepository.findById(parche.getId())).thenReturn(Mono.just(parche));
         Mockito.when(inscripcionRepository.deleteAllByParcheId(parche.getId())).thenReturn(Mono.empty());
@@ -78,18 +91,18 @@ class DeshabilitarParcheRouterTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ParcheDTO.class)
-                .value(response ->{
-                    Assertions.assertEquals(response.getId(), parche.getId());
-                    Assertions.assertEquals(response.getDuenoDelParche(), parche.getDuenoDelParche());
-                    Assertions.assertEquals(response.getNombreParche().getValorNombre(), parche.getNombreParche().getValorNombre());
-                    Assertions.assertEquals(response.getDescripcion().getValorDescripcion(), parche.getDescripcion().getValorDescripcion());
-                    Assertions.assertEquals(response.getFechaInicio().getValorFecha(), parche.getFechaInicio().getValorFecha());
-                    Assertions.assertEquals(response.getFechaFin().getValorFecha(), parche.getFechaFin().getValorFecha());
-                    Assertions.assertEquals(response.getEstado(), parche.getEstado());
-                    Assertions.assertEquals(response.getCategoria(), parche.getCategoria());
-                    Assertions.assertEquals(response.getCapacidadMaxima().getValorCapacidad(), parche.getCapacidadMaxima().getValorCapacidad());
-                    Assertions.assertEquals(response.getUbicacionParche().getLat(), parche.getUbicacion().getLat());
-                    Assertions.assertEquals(response.getUbicacionParche().getLng(), parche.getUbicacion().getLng());
+                .value(responseDeshabilitar ->{
+                    Assertions.assertEquals(responseDeshabilitar.getId(), parche.getId());
+                    Assertions.assertEquals(responseDeshabilitar.getDuenoDelParche(), parche.getDuenoDelParche());
+                    Assertions.assertEquals(responseDeshabilitar.getNombreParche().getValorNombre(), parche.getNombreParche().getValorNombre());
+                    Assertions.assertEquals(responseDeshabilitar.getDescripcion().getValorDescripcion(), parche.getDescripcion().getValorDescripcion());
+                    Assertions.assertEquals(responseDeshabilitar.getFechaInicio().getValorFecha(), parche.getFechaInicio().getValorFecha());
+                    Assertions.assertEquals(responseDeshabilitar.getFechaFin().getValorFecha(), parche.getFechaFin().getValorFecha());
+                    Assertions.assertEquals(responseDeshabilitar.getEstado(), parche.getEstado());
+                    Assertions.assertEquals(responseDeshabilitar.getCategoria(), parche.getCategoria());
+                    Assertions.assertEquals(responseDeshabilitar.getCapacidadMaxima().getValorCapacidad(), parche.getCapacidadMaxima().getValorCapacidad());
+                    Assertions.assertEquals(responseDeshabilitar.getUbicacionParche().getLat(), parche.getUbicacion().getLat());
+                    Assertions.assertEquals(responseDeshabilitar.getUbicacionParche().getLng(), parche.getUbicacion().getLng());
                 });
 
         Mockito.verify(parcheRepository, Mockito.times(1)).save(Mockito.any());
