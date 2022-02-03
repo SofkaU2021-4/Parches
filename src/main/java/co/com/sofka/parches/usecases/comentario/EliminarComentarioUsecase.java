@@ -24,9 +24,9 @@ public class EliminarComentarioUsecase implements Function<String, Mono<String>>
     public Mono<String> apply(String id) {
         Objects.requireNonNull(id, "Id es requerido");
         return comentarioRepository.findById(id)
-                .flatMap(comentario -> {
-                    return comentarioRepository.deleteById(comentario.getId()).thenReturn("Eliminado");
-                })
+                .flatMap(comentario ->
+                    comentarioRepository.deleteById(comentario.getId()).thenReturn("Eliminado")
+                )
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST , "id Incorrecto")));
     }
 

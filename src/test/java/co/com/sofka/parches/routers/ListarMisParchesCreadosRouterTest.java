@@ -25,6 +25,8 @@ import reactor.core.publisher.Flux;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @WebFluxTest
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {ListarMisParchesCreadosRouter.class, ListarMisParchesCreadosUseCase.class, ParcheMapper.class})

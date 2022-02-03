@@ -53,14 +53,14 @@ class CrearComentarioRouterTest {
         comentario.setId("xxx");
         comentario.setUserId("yyy");
         comentario.setParcheId("zzz");
-        comentario.setComentario("prueba");
+        comentario.setMensaje("prueba");
         comentario.setFechaCreacion(LocalDateTime.of(2022, 01, 31, 16, 19, 29));
 
         var comentarioDTO = new ComentarioDTO(
                 comentario.getId(),
                 comentario.getUserId(),
                 comentario.getParcheId(),
-                comentario.getComentario());
+                comentario.getMensaje());
         comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
 
         var usuario = new Usuario("XXX",
@@ -90,7 +90,7 @@ class CrearComentarioRouterTest {
                     Assertions.assertThat(comentarioDTO1.getId()).isEqualTo(comentario.getId());                    Assertions.assertThat(comentarioDTO1.getId()).isEqualTo(comentario.getId());
                     Assertions.assertThat(comentarioDTO1.getUserId()).isEqualTo(comentario.getUserId());
                     Assertions.assertThat(comentarioDTO1.getParcheId()).isEqualTo(comentario.getParcheId());
-                    Assertions.assertThat(comentarioDTO1.getComentario()).isEqualTo(comentario.getComentario());
+                    Assertions.assertThat(comentarioDTO1.getMensaje()).isEqualTo(comentario.getMensaje());
                     Assertions.assertThat(comentarioDTO1.getFechaCreacion()).isEqualTo(comentario.getFechaCreacion());
                 });
         Mockito.verify(parcheRepository,Mockito.times(1)).findById("zzz");

@@ -39,10 +39,10 @@ public class CrearComentarioUseCase implements Function<ComentarioDTO, Mono<Come
     public Mono<ComentarioDTO> apply(ComentarioDTO comentarioDTO) {
         comentarioDTO.setFechaCreacion(LocalDateTime.now(ZoneId.of("America/Bogota")));
         return parcheRepository.findById(comentarioDTO.getParcheId())
-                .flatMap(parche -> {
-                    return usuarioRepository.findByUid(comentarioDTO.getUserId())
-                            .flatMap(usuario -> {
-                                return comentarioRepository.save(comentarioMapper.comentariomapToCollection()
+                .flatMap(parche ->
+                    usuarioRepository.findByUid(comentarioDTO.getUserId())
+                            .flatMap(usuario ->
+                                comentarioRepository.save(comentarioMapper.comentariomapToCollection()
                                                 .apply(comentarioDTO))
                                         .map(comentario->{
                                             var comentarioDto= comentarioMapper.comentariomapToDTO()
@@ -51,10 +51,10 @@ public class CrearComentarioUseCase implements Function<ComentarioDTO, Mono<Come
                                                     .apply(usuario);
                                             comentarioDto.setUsuario(usuarioDto);
                                             return comentarioDto;
-                                                });
-                            })
-                            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuario no Existe")));
-                })
+                                                })
+                            )
+                            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuario no Existe")))
+                )
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST , "Parche no Existe")));
     }
 }

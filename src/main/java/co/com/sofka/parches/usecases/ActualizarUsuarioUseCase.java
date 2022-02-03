@@ -27,10 +27,8 @@ public class ActualizarUsuarioUseCase implements Function<UsuarioDTO, Mono<Usuar
     @Override
     public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
        return usuarioRepository.findById(usuarioDTO.getId())
-            .flatMap(usuario -> {
-    return usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(usuarioDTO.getId()).apply(usuarioDTO))
-            .map(mapperUtils.mapperEntidadUsuarioaDTO());
-})
+            .flatMap(usuario -> usuarioRepository.save(mapperUtils.mapperDTOaEntidadUsuario(usuarioDTO.getId()).apply(usuarioDTO))
+                    .map(mapperUtils.mapperEntidadUsuarioaDTO()))
         .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND , "Usuario no Existe")));
 }
 

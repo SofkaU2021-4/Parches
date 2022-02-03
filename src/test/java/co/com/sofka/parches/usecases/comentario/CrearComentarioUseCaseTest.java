@@ -43,7 +43,7 @@ class CrearComentarioUseCaseTest {
         comentario.setId("xxx");
         comentario.setUserId("yyy");
         comentario.setParcheId("zzz");
-        comentario.setComentario("prueba");
+        comentario.setMensaje("prueba");
         comentario.setFechaCreacion(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
 
         var usuario = new Usuario("XXX",
@@ -59,7 +59,7 @@ class CrearComentarioUseCaseTest {
                 comentario.getId(),
                 comentario.getUserId(),
                 comentario.getParcheId(),
-                comentario.getComentario());
+                comentario.getMensaje());
         comentarioDTO.setFechaCreacion( comentario.getFechaCreacion());
 
         Mockito.when(parcheRepository.findById("zzz")).thenReturn(Mono.just(parche));
@@ -70,7 +70,7 @@ class CrearComentarioUseCaseTest {
             assert comentario1.getId().equals("xxx");
             assert comentario1.getUserId().equals("yyy");
             assert comentario1.getParcheId().equals("zzz");
-            assert comentario1.getComentario().equals("prueba");
+            assert comentario1.getMensaje().equals("prueba");
             assert comentario1.getFechaCreacion().equals(LocalDateTime.of(2022, 1, 31, 16, 19, 29));
             return true;
         }).verifyComplete();

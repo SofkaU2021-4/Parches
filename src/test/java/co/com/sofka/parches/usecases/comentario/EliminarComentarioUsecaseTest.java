@@ -30,7 +30,7 @@ class EliminarComentarioUsecaseTest {
         comentario.setId("xxx");
         comentario.setUserId("yyy");
         comentario.setParcheId("zzz");
-        comentario.setComentario("prueba");
+        comentario.setMensaje("prueba");
         comentario.setFechaCreacion(LocalDateTime.of(2022, 01, 31, 16, 19, 29));
 
         Mockito.when(repository.findById("xxx")).thenReturn(Mono.just(comentario));
