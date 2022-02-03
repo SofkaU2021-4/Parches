@@ -9,6 +9,9 @@ import co.com.sofka.parches.valueObjects.NombreParche;
 
 public class ValidadorParche {
 
+    private ValidadorParche() {
+    }
+
     public static Boolean validarCapacidad(CapacidadParche capacidad){
         return capacidad.getValorCapacidad() > 0;
     }
