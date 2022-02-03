@@ -18,6 +18,18 @@ class CrearParcheUseCaseTest {
     ParcheRepository parcheRepository;
     CrearParcheUseCase crearParcheUseCase;
 
+    private static final String NOMBRE_PARCHE_CREAR_PARCHE = "parche de prueba";
+    private static final String DESCRIPCION_CREAR_PARCHE = "descripcion de prueba";
+    private static final String FECHA_CREACION_CREAR_PARCHE = "2022-12-12T08:59:11.332";
+    private static final String FECHA_INICIO_CREAR_PARCHE = "2022-12-12T10:59:11.332";
+    private static final String FECHA_FIN_CREAR_PARCHE = "2022-12-12T12:59:11.332";
+    private static final Estado ESTADO_CREAR_PARCHE = Estado.HABILITADO;
+    private static final Categoria CATEGORIA_CREAR_PARCHE = Categoria.APRENDIZAJE;
+    private static final Long CAPACIDAD_CREAR_PARCHE = 10L;
+    private static final Double LAT_CREAR_PARCHE = 1.0;
+    private static final Double LNG_CREAR_PARCHE = 1.0;
+    private static final String DIRECCION_CREAR_PARCHE = "aaa";
+
     @BeforeEach
     public void setup(){
         ParcheMapper parcheMapper = new ParcheMapper();
@@ -26,48 +38,49 @@ class CrearParcheUseCaseTest {
     }
 
     @Test
-    void crearParcheUseCase(){
+    void crearParcheUseCaseTest(){
         var parche = new Parche();
         parche.setId("xxxx");
         parche.setDuenoDelParche("yyyy");
-        parche.setNombreParche(new NombreParche("parche de prueba"));
-        parche.setDescripcion(new DescripcionParche("descripcion de prueba"));
-        parche.setFechaCreacion(new FechaParche("2022-12-12T08:59:11.332"));
-        parche.setFechaInicio(new FechaParche("2022-12-12T10:59:11.332"));
-        parche.setFechaFin(new FechaParche("2022-12-12T12:59:11.332"));
-        parche.setEstado(Estado.HABILITADO);
-        parche.setCategoria(Categoria.APRENDIZAJE);
-        parche.setCapacidadMaxima(new CapacidadParche(10L));
-        parche.setUbicacion(new UbicacionParche(1.0, 1.0, "aaa"));
+        parche.setNombreParche(new NombreParche(NOMBRE_PARCHE_CREAR_PARCHE));
+        parche.setDescripcion(new DescripcionParche(DESCRIPCION_CREAR_PARCHE));
+        parche.setFechaCreacion(new FechaParche(FECHA_CREACION_CREAR_PARCHE));
+        parche.setFechaInicio(new FechaParche(FECHA_INICIO_CREAR_PARCHE));
+        parche.setFechaFin(new FechaParche(FECHA_FIN_CREAR_PARCHE));
+        parche.setEstado(ESTADO_CREAR_PARCHE);
+        parche.setCategoria(CATEGORIA_CREAR_PARCHE);
+        parche.setCapacidadMaxima(new CapacidadParche(CAPACIDAD_CREAR_PARCHE));
+        parche.setUbicacion(new UbicacionParche(LAT_CREAR_PARCHE, LNG_CREAR_PARCHE, DIRECCION_CREAR_PARCHE));
 
         var parcheDTO = new ParcheDTO();
         parcheDTO.setId("xxxx");
         parcheDTO.setDuenoDelParche("yyyy");
-        parcheDTO.setNombreParche(new NombreParche("parche de prueba"));
-        parcheDTO.setDescripcion(new DescripcionParche("descripcion de prueba"));
-        parcheDTO.setFechaInicio(new FechaParche("2022-12-12T10:59:11.332"));
-        parcheDTO.setFechaFin(new FechaParche("2022-12-12T12:59:11.332"));
-        parcheDTO.setEstado(Estado.HABILITADO);
-        parcheDTO.setCategoria(Categoria.APRENDIZAJE);
-        parcheDTO.setCapacidadMaxima(new CapacidadParche(10L));
-        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0, "aaa"));
+        parcheDTO.setNombreParche(new NombreParche(NOMBRE_PARCHE_CREAR_PARCHE));
+        parcheDTO.setDescripcion(new DescripcionParche(DESCRIPCION_CREAR_PARCHE));
+        parcheDTO.setFechaCreacion(new FechaParche(FECHA_CREACION_CREAR_PARCHE));
+        parcheDTO.setFechaInicio(new FechaParche(FECHA_INICIO_CREAR_PARCHE));
+        parcheDTO.setFechaFin(new FechaParche(FECHA_FIN_CREAR_PARCHE));
+        parcheDTO.setEstado(ESTADO_CREAR_PARCHE);
+        parcheDTO.setCategoria(CATEGORIA_CREAR_PARCHE);
+        parcheDTO.setCapacidadMaxima(new CapacidadParche(CAPACIDAD_CREAR_PARCHE));
+        parcheDTO.setUbicacionParche(new UbicacionParche(LAT_CREAR_PARCHE, LNG_CREAR_PARCHE, DIRECCION_CREAR_PARCHE));
 
 
         Mockito.when(parcheRepository.save(Mockito.any())).thenReturn(Mono.just(parche));
 
         StepVerifier.create(crearParcheUseCase.crearParche(parcheDTO))
-                .expectNextMatches(parcheDTO1 -> {
-                    assert parcheDTO1.getId().equals("xxxx");
-                    assert parcheDTO1.getDuenoDelParche().equals("yyyy");
-                    assert parcheDTO1.getNombreParche().getValorNombre().equals("parche de prueba");
-                    assert parcheDTO1.getDescripcion().getValorDescripcion().equals("descripcion de prueba");
-                    assert parcheDTO1.getFechaInicio().getValorFecha().toString().equals("2022-12-12T10:59:11.332");
-                    assert parcheDTO1.getFechaFin().getValorFecha().toString().equals("2022-12-12T12:59:11.332");
-                    assert parcheDTO1.getEstado().equals(Estado.HABILITADO);
-                    assert parcheDTO1.getCategoria().equals(Categoria.APRENDIZAJE);
-                    assert parcheDTO1.getCapacidadMaxima().getValorCapacidad().equals(10L);
-                    assert parcheDTO1.getUbicacionParche().getLat().equals(1.0);
-                    assert parcheDTO1.getUbicacionParche().getLng().equals(1.0);
+                .expectNextMatches(parchesDTO -> {
+                    assert parchesDTO.getId().equals(parcheDTO.getId());
+                    assert parchesDTO.getDuenoDelParche().equals(parcheDTO.getDuenoDelParche());
+                    assert parchesDTO.getNombreParche().getValorNombre().equals(parcheDTO.getNombreParche().getValorNombre());
+                    assert parchesDTO.getDescripcion().getValorDescripcion().equals(parcheDTO.getDescripcion().getValorDescripcion());
+                    assert parchesDTO.getFechaInicio().getValorFecha().toString().equals(parcheDTO.getFechaInicio().getValorFecha().toString());
+                    assert parchesDTO.getFechaFin().getValorFecha().toString().equals(parcheDTO.getFechaFin().getValorFecha().toString());
+                    assert parchesDTO.getEstado().equals(parcheDTO.getEstado());
+                    assert parchesDTO.getCategoria().equals(parcheDTO.getCategoria());
+                    assert parchesDTO.getCapacidadMaxima().getValorCapacidad().equals(parcheDTO.getCapacidadMaxima().getValorCapacidad());
+                    assert parchesDTO.getUbicacionParche().getLat().equals(parcheDTO.getUbicacionParche().getLat());
+                    assert parchesDTO.getUbicacionParche().getLng().equals(parcheDTO.getUbicacionParche().getLng());
                     return true;
                 })
                 .verifyComplete();

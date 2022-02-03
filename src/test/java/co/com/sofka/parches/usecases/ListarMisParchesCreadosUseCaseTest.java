@@ -1,26 +1,21 @@
-package co.com.sofka.parches.useCases;
+package co.com.sofka.parches.usecases;
 
 import co.com.sofka.parches.collections.Inscripcion;
 import co.com.sofka.parches.collections.Parche;
-import co.com.sofka.parches.dtos.ParcheDTO;
 import co.com.sofka.parches.enums.Categoria;
 import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
-import co.com.sofka.parches.usecases.ListarMisParchesCreadosUseCase;
 import co.com.sofka.parches.valueObjects.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ListarMisParchesCreadosUseCaseTest {
 
