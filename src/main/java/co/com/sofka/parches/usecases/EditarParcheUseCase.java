@@ -29,15 +29,15 @@ public class EditarParcheUseCase implements EditarParche{
     @Override
     public Mono<ParcheDTO> editarParche(ParcheDTO parcheDTO) {
         Objects.requireNonNull(parcheDTO.getId());
-        return parcheRepository.findById(parcheDTO.getId())
-                .flatMap(parche -> inscripcionrepository.countAllByParcheId(parcheDTO.getId())
-                        .flatMap(value -> {
-                            if(parcheDTO.getCapacidadMaxima().getValorCapacidad() > value){
-                                return parcheRepository.save(parcheMapper.mapToCollection().apply(ValidadorParche.validarParche(parcheDTO)))
-                                        .map(parcheMapper.mapToDTO());
-                            }
-                            return Mono.error(new IllegalArgumentException("Error: la capacidad maxima no puede ser menor que el numero de usuarios inscritos"));
-                        })).switchIfEmpty(Mono.error(new IllegalArgumentException("Error: el parche no existe")));
+        return parcheRepository.findById(parcheDTO.getId()).flatMap(parche ->
+                inscripcionrepository.countAllByParcheId(parcheDTO.getId())
+                .flatMap(value -> {
+                    if(parcheDTO.getCapacidadMaxima().getValorCapacidad() > value){
+                        return parcheRepository.save(parcheMapper.mapToCollection().apply(ValidadorParche.validarParche(parcheDTO)))
+                                .map(parcheMapper.mapToDTO());
+                    }
+                    return Mono.error(new IllegalArgumentException("Error: la capacidad maxima no puede ser menor que el numero de usuarios inscritos"));
+                })).switchIfEmpty(Mono.error(new IllegalArgumentException("Error: el parche no existe")));
     }
 
 }

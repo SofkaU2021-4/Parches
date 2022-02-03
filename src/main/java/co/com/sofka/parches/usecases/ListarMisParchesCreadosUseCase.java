@@ -6,9 +6,12 @@ import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
 import co.com.sofka.parches.valueObjects.CantidadParticipantes;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -30,7 +33,7 @@ public class ListarMisParchesCreadosUseCase implements ListarMisParchesCreados {
     @Override
     public Flux<ParcheDTO> listarMisParchesCreados(String duenoDelParche) {
         Objects.requireNonNull(duenoDelParche, "Id del dueño del parche es requerido");
-        return parcheRepository.findAllByDuenoDelParche(duenoDelParche)
+        return parcheRepository.findAllByDuenoDelParche(duenoDelParche).switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuario no Existe")))
                 .filter(parcheDTO -> parcheDTO.getEstado().equals(Estado.HABILITADO))
                 .map(parcheMapper.mapToDTO())
                 .flatMap(contarParticipantesParche());
