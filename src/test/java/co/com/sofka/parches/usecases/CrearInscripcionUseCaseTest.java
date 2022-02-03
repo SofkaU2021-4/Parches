@@ -1,4 +1,4 @@
-package co.com.sofka.parches.useCases;
+package co.com.sofka.parches.usecases;
 
 import co.com.sofka.parches.collections.Inscripcion;
 import co.com.sofka.parches.mappers.InscripcionMapper;
