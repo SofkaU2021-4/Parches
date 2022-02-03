@@ -34,6 +34,4 @@ build/
 ### VS Code ###
 .vscode/
 
-
-service-account.json
 src/main/java/co/com/sofka/parches/personal
