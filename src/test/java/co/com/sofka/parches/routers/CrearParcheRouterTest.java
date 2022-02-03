@@ -32,33 +32,46 @@ class CrearParcheRouterTest {
     @Autowired
     private WebTestClient webTestClient;
 
+    private static final String NOMBRE_PARCHE_CREAR_PARCHE_ROUTER = "parche de prueba";
+    private static final String DESCRIPCION_CREAR_PARCHE_ROUTER = "descripcion de prueba";
+    private static final String FECHA_CREACION_CREAR_PARCHE_ROUTER = "2022-12-12T08:59:11.332";
+    private static final String FECHA_INICIO_CREAR_PARCHE_ROUTER = "2022-12-12T10:59:11.332";
+    private static final String FECHA_FIN_CREAR_PARCHE_ROUTER = "2022-12-12T12:59:11.332";
+    private static final Estado ESTADO_CREAR_PARCHE_ROUTER = Estado.HABILITADO;
+    private static final Categoria CATEGORIA_CREAR_PARCHE_ROUTER = Categoria.APRENDIZAJE;
+    private static final Long CAPACIDAD_CREAR_PARCHE_ROUTER = 10L;
+    private static final Double LAT_CREAR_PARCHE_ROUTER = 1.0;
+    private static final Double LNG_CREAR_PARCHE_ROUTER = 1.0;
+    private static final String DIRECCION_CREAR_PARCHE_ROUTER = "aaa";
+
     @Test
     void crearParcheRouterTest(){
 
         var parche = new Parche();
         parche.setId("xxxx");
         parche.setDuenoDelParche("yyyy");
-        parche.setNombreParche(new NombreParche("parche de prueba"));
-        parche.setDescripcion(new DescripcionParche("descripcion de prueba"));
-        parche.setFechaCreacion(new FechaParche("2022-12-12T08:59:11.332"));
-        parche.setFechaInicio(new FechaParche("2022-12-12T10:59:11.332"));
-        parche.setFechaFin(new FechaParche("2022-12-12T12:59:11.332"));
-        parche.setEstado(Estado.HABILITADO);
-        parche.setCategoria(Categoria.APRENDIZAJE);
-        parche.setCapacidadMaxima(new CapacidadParche(10L));
-        parche.setUbicacion(new UbicacionParche(1.0, 1.0, "aaa"));
+        parche.setNombreParche(new NombreParche(NOMBRE_PARCHE_CREAR_PARCHE_ROUTER));
+        parche.setDescripcion(new DescripcionParche(DESCRIPCION_CREAR_PARCHE_ROUTER));
+        parche.setFechaCreacion(new FechaParche(FECHA_CREACION_CREAR_PARCHE_ROUTER));
+        parche.setFechaInicio(new FechaParche(FECHA_INICIO_CREAR_PARCHE_ROUTER));
+        parche.setFechaFin(new FechaParche(FECHA_FIN_CREAR_PARCHE_ROUTER));
+        parche.setEstado(ESTADO_CREAR_PARCHE_ROUTER);
+        parche.setCategoria(CATEGORIA_CREAR_PARCHE_ROUTER);
+        parche.setCapacidadMaxima(new CapacidadParche(CAPACIDAD_CREAR_PARCHE_ROUTER));
+        parche.setUbicacion(new UbicacionParche(LAT_CREAR_PARCHE_ROUTER, LNG_CREAR_PARCHE_ROUTER, DIRECCION_CREAR_PARCHE_ROUTER));
 
         var parcheDTO = new ParcheDTO();
         parcheDTO.setId("xxxx");
         parcheDTO.setDuenoDelParche("yyyy");
-        parcheDTO.setNombreParche(new NombreParche("parche de prueba"));
-        parcheDTO.setDescripcion(new DescripcionParche("descripcion de prueba"));
-        parcheDTO.setFechaInicio(new FechaParche("2022-12-12T10:59:11.332"));
-        parcheDTO.setFechaFin(new FechaParche("2022-12-12T12:59:11.332"));
-        parcheDTO.setEstado(Estado.HABILITADO);
-        parcheDTO.setCategoria(Categoria.APRENDIZAJE);
-        parcheDTO.setCapacidadMaxima(new CapacidadParche(10L));
-        parcheDTO.setUbicacionParche(new UbicacionParche(1.0, 1.0, "aaa"));
+        parcheDTO.setNombreParche(new NombreParche(NOMBRE_PARCHE_CREAR_PARCHE_ROUTER));
+        parcheDTO.setDescripcion(new DescripcionParche(DESCRIPCION_CREAR_PARCHE_ROUTER));
+        parcheDTO.setFechaCreacion(new FechaParche(FECHA_CREACION_CREAR_PARCHE_ROUTER));
+        parcheDTO.setFechaInicio(new FechaParche(FECHA_INICIO_CREAR_PARCHE_ROUTER));
+        parcheDTO.setFechaFin(new FechaParche(FECHA_FIN_CREAR_PARCHE_ROUTER));
+        parcheDTO.setEstado(ESTADO_CREAR_PARCHE_ROUTER);
+        parcheDTO.setCategoria(CATEGORIA_CREAR_PARCHE_ROUTER);
+        parcheDTO.setCapacidadMaxima(new CapacidadParche(CAPACIDAD_CREAR_PARCHE_ROUTER));
+        parcheDTO.setUbicacionParche(new UbicacionParche(LAT_CREAR_PARCHE_ROUTER, LNG_CREAR_PARCHE_ROUTER, DIRECCION_CREAR_PARCHE_ROUTER));
 
         Mockito.when(parcheRepository.save(Mockito.any())).thenReturn(Mono.just(parche));
 

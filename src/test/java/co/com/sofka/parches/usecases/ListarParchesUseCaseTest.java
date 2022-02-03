@@ -7,14 +7,14 @@ import co.com.sofka.parches.enums.Estado;
 import co.com.sofka.parches.mappers.ParcheMapper;
 import co.com.sofka.parches.repositories.InscripcionRepository;
 import co.com.sofka.parches.repositories.ParcheRepository;
+import co.com.sofka.parches.usecases.ListarParchesUseCase;
 import co.com.sofka.parches.valueObjects.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
-
 import java.time.LocalDateTime;
-
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 

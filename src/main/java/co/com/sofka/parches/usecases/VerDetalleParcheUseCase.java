@@ -57,7 +57,9 @@ public class VerDetalleParcheUseCase implements VerDetalleParche {
                 .flatMap(datos -> {
                     var parche = datos.getT1().getT1();
                     var cantidadAsistentes = datos.getT2();
+
                     var inscripcion = datos.getT1().getT2();
+
                     var duenoDelParcheId = usuarioRepository.findByUid(parche.getDuenoDelParche());
                     var detallesParcheDTO = parcheMapper.mapToDetallesParcheDTO()
                             .apply(parche);
